@@ -200,16 +200,13 @@
                 <p>
                     (2) Multi-scale Garment-Pose Feature Alignment, which first applies Adaptive Multi-scale Feature Extraction (AMFE) to enhance low-level garment details, and then aligns garment features with pose features using Garment-Pose Feature Alignment (GPFA).
                 </p>
-                <img src="src\Fig2Model.pdf" style="width:90%;">
-                <p class="caption" align="center"><strong>Overview of Graph Relation Pose (GRPose).</strong> It consists of Diffusion Pipeline, Graph Pose Adapter and Pose Perception Loss.
-                    The Pose Encoder uses a coupling structure in alongside the Progressive Graph Integrator (PGI) to capture graph relationships between different pose parts. The Pose Perception Loss adopts a pre-trained pose estimation network to regularize the pose alignment in the feature space.
+                <img src="src\Fig2Model_00.png" style="width:90%;">
+                <p class="caption" align="center"><strong>Architecture of the ChronoTailor.</strong> Spatial-Temporal Attention Guidance enables the acquisition of stable guidance for garment feature injection. Multi-scale Garment-Pose Feature Alignment, meanwhile, facilitates the capture of more precise garment information during motion.
                 </p> <br>
 
-                <img src="src\PGI.png" style="width:60%;">
+                <img src="src\supp_styledress_00.png" style="width:60%;">
                 <p class="caption" align="center">
-                    <strong>Details of Progressive Graph Integrator (PGI).</strong> The pose prior \( x_p \) and
-                    latent representation \( x_l \) are gridded to construct graphs \( \mathcal{G}_p \)
-                    and \( \mathcal{G}_p \) respectively, where GCNs are employed to fuse and update the information.
+                    <strong>Sample pairs from the StyleDress.</strong>
                 </p>
 
                 <div class="section-title">Visualization of Methods</div>
