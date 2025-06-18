@@ -174,8 +174,8 @@
             </div>
 
             <div class="teaser-image">
-                <img src="src\front.png" style="width:90%;">
-                <p class="caption" align="center"><strong>ChronoTailor</strong> generates temporally consistent videos with fine-grained garment details. Visual comparisons with state-of-the-art methods showcase our framework's superiority in preserving fabric textures and motion continuity.
+                <img src="src\Fig1_00.png" style="width:90%;">
+                <p class="caption" align="center"><strong>ChronoTailor</strong> excels at generating high-quality virtual try-ons for diverse garments, effectively maintaining visual coherence and preserving background details.
                 </p>
             </div>
 
@@ -219,36 +219,44 @@
                     </div>
                     <div class="glide__track" data-glide-el="track">
                         <ul class="glide__slides">
-                            <li class="glide__slide"><img src="src/compa.png" style="width:70%;">
+                            <li class="glide__slide"><img src="src/VIVID_00.png" style="width:70%;">
                                 <p class="caption" align="center">
-                                    <strong>Visual comparison of ours and other methods.</strong> The samples are from the Human-Art dataset, with each row representing a sample along with its corresponding pose and prompt. Our GRPose, HumanSD, ControlNet, and T2I-Adapter were provided with both a prompt and a pose, while SD1.5 was provided with only a prompt. Our model achieved outstanding results in visual quality and pose alignment.                                </p>
+                                    <strong>Visual comparison of ours and other methods.</strong> Our method demonstrates superior capability in generating clearer texture details within the editing region, producing more plausible results that exhibit enhanced visual fidelity and structural coherence.                              </p>
+                            </li>
+                            
+                            <li class="glide__slide"><img src="src/viton_00.png" style="width:60%;">
+                                <p class="caption" align="center">
+                                    <strong>Qualitative comparison on the VITON-HD dataset.</strong> </p>
+                            </li>
+                            <li class="glide__slide"><img src="src/Fig6_accessories_00.png" style="width:60%;">
+                                <p class="caption" align="center">
+                                    <strong>ChronoTailor effectively preserves information in non - edited regions.</strong> </p>
                             </li>
 
-                            <li class="glide__slide"><img src="src/transfer.png" style="width:60%;">
+                            <li class="glide__slide"><img src="src/Fig8_inthewild_00.png" style="width:60%;">
                                 <p class="caption" align="center">
-                                    <strong>Comparison of different base diffusion models for our GRPose.</strong> We compared SD1.5, Anime Art and Realistic models of different styles. GRPose effectively enhances each model with superior pose alignment.                                </p>
+                                    <strong>Qualitative results of our method on the StyleDress dataset.</strong> </p>
                             </li>
 
-                            <li class="glide__slide"><img src="src/multi-pose.png" style="width:60%;">
+                            <li class="glide__slide"><img src="src/AMFE_00.png" style="width:60%;">
                                 <p class="caption" align="center">
-                                    <strong>Results of Multi-Pose Generation.</strong> Our model outperforms ControlNet in generating multiple poses.
-                                </p>
+                                    <strong>Ablation study of Adaptive Multi-scale Feature Extraction. The upper garment try-on fully recovers two floral patterns, demonstrating ChronoTailor’s capability to preserve intricate textures and semantic details.</strong> </p>
                             </li>
 
+                             <li class="glide__slide"><img src="src/ATFF_00.png" style="width:60%;">
+                                <p class="caption" align="center">
+                                    <strong>Ablation study of Attention-Driven Temporal Feature Fusion.</strong> </p>
+                            </li>
+
+                             <li class="glide__slide"><img src="src/RASG_00.png" style="width:60%;">
+                                <p class="caption" align="center">
+                                    <strong>Ablation study of Region-Aware Spatial Guidance.</strong>Our method balances attention between editing and non - editing regions. </p>
+                            </li>
                         </ul>
                     </div>
                 </div>
 
                 <br>
-
-            <div class="section-title">Quantitative Results</div>
-            <div class="content">
-                <img src="src\table.png" style="width:80%;">
-                <p class="caption" align="center"><strong>Results on Human-Art and LAION-Human datasets.</strong> The best results and the second best results are marked in green and blue respectively. Results marked with asterisk (*) are evaluated on the released models.</p>
-            </div>
-
-
-
           <div class="section-title">BibTeX</div>
             <div class="container is-max-desktop content">
               <pre><code>@article{wang2025chronotailor,
