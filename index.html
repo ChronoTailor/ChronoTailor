@@ -163,13 +163,11 @@
             </div>
 
             <div class="project-icons">
-                <a href="#" id="paper-link">
+                <a href="https://arxiv.org/abs/2506.05858" id="paper-link">
                     <i class="fa fa-file"></i> <br/>
-                    https://arxiv.org/abs/2506.05858
                 </a>
-                <a href="#" id="code-link">
+                <a href="https://github.com/ChronoTailor/ChronoTailor/" id="code-link">
                     <i class="fa fa-github"></i> <br/>
-                    https://github.com/ChronoTailor/ChronoTailor/
                 </a>
             </div>
 
@@ -255,6 +253,68 @@
                         </ul>
                     </div>
                 </div>
+
+                <br>
+             <div class="section-title">More Results</div>
+<div class="glide1">
+    <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides" id="videoSlides">
+            <!-- 这里通过JS动态插入视频 -->
+        </ul>
+    </div>
+</div>
+
+<!-- 引入 Glide.js 依赖 -->
+<link rel="stylesheet" href="https://unpkg.com/@glidejs/glide/dist/css/glide.core.min.css">
+<script src="https://unpkg.com/@glidejs/glide"></script>
+<script>
+    window.onload = function () {
+        const videoNames = [
+            "00126_00.mp4",
+            "1221638_in_xl.mp4",
+            "1221638_in_xl_2.mp4",
+            "1223307_in_xl.mp4",
+            "1224618_in_xl.mp4",
+            "1225120_in_xl.mp4",
+            "1229233_in_xl.mp4",
+            "1232939_in_xl.mp4",
+            "1238040_in_xl.mp4",
+            "1254417_in_xl.mp4"
+        ];
+        const videoSlides = document.getElementById('videoSlides');
+        videoNames.forEach(name => {
+            const li = document.createElement('li');
+            li.className = 'glide__slide';
+            li.innerHTML = `
+                <video src="src/${name}" 
+                       autoplay muted loop 
+                       style="width: 100%; max-width: 700px; border-radius: 8px;">
+                    您的浏览器不支持 video 标签，请升级浏览器。
+                </video>
+            `;
+            videoSlides.appendChild(li);
+        });
+        // 初始化轮播
+        new Glide('.glide1', {
+            type: 'carousel',
+            startAt: 0,
+            perView: 1,
+            autoplay: 5000, 
+            animationDuration: 500, 
+            gap: 20 
+        }).mount();
+    }
+</script>
+
+<style>
+    .glide__slides {
+        display: flex;
+        justify-content: center;
+    }
+    video {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+    }
+</style>
 
                 <br>
           <div class="section-title">BibTeX</div>
