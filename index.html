@@ -1,10 +1,10 @@
 <!Doctype html>
 <html lang="en">
     <head>
-        <title>ChronoTailor: Harnessing Attention Guidance for Fine-Grained Video Virtual Try-On</title>
+        <title>GRPose: Learning Graph Relations for Human Image Generation with Pose Priors</title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="author" content="Jinjuan Wang, Wenzhang Sun, Ming Li, et al.">
+        <meta name="author" content="Despoina Paschalidou">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--        <link rel="icon" type="image/png" href="data/bunny.png"/>-->
 
@@ -105,40 +105,37 @@
 <!--            <img src="src\logo_image_final.jpg" style="width:40%;">-->
             
             <h1 class="project-title">
-                ChronoTailor: Harnessing Attention Guidance for Fine-Grained Video Virtual Try-On
+                GRPose: Learning Graph Relations for Human Image Generation with Pose Priors
             </h1>
             
             <div class="authors">
 
                 <a href="">
-                    Jinjuan Wang <sup>1,\*</sup>
-                </a>
-                <a href="">
-                    Wenzhang Sun <sup>2,\*</sup>
-                </a>
-                <a href="">
-                    Ming Li <sup>1</sup>
-                </a>
-                <a href="">
-                    Yun Zheng <sup>1</sup>
-                </a>
-                <a href="">
-                    Fanyao Li <sup>1</sup>
-                </a>
-                <a href="">
-                    Zhulin Tao <sup>1,\ dagger</sup>
+                    Xiangchen Yin <sup>1,5</sup>
                 </a>
                 <a href="">
                     Donglin Di <sup>2</sup>
                 </a>
                 <a href="">
+                    Lei Fan <sup>3</sup>
+                </a>
+                <a href="">
                     Hao Li <sup>2</sup>
                 </a>
                 <a href="">
-                    Chen Wei <sup>2</sup>
+                    Wei Chen <sup>2</sup>
                 </a>
                 <a href="">
-                    Xianglin Huang <sup>1</sup>
+                    Xiaofei Gou <sup>2</sup>
+                </a>
+                <a href="">
+                    Yang Song <sup>3</sup>
+                </a>
+                <a href="">
+                    Xiao Sun <sup>4</sup>
+                </a>
+                <a href="">
+                    Xun Yang <sup>1</sup>
                 </a>
 
 
@@ -146,82 +143,120 @@
 
             <div class="affiliations">
                 <span><sup>1</sup> 
-                    <a href="https://www.cuc.edu.cn">
-                    Communication University of China
+                    <a href=https://www.ustc.edu.cn//>
+                    University of Science and Technology of China
                     </a>
                 </span>
 
                 <span><sup>2</sup> 
                     <a href="">
-                    Li Auto
+                    Space AI, Li Auto
                     </a>
                 </span>
+
+                <br>
+
+                <span><sup>3</sup>
+                    <a href=https://www.unsw.edu.au//>
+                    University of New South Wales
+                    </a>
+                </span>
+
+                <span><sup>4</sup>
+                    <a href=https://www.hfut.edu.cn//>
+                    Hefei University of Technology
+                    </a>
+                </span>
+
+                <br>
+
+                <span><sup>5</sup>
+                    <a href="">
+                    Institute of Artificial Intelligence, Hefei Comprehensive National Science Center
+                    </a>
+                </span>
+
+
             </div>
 
             <div class="project-conference">
-                <!-- 会议信息可根据实际情况添加，如：CVPR 2025 -->
+                AAAI 2025
             </div>
 
             <div class="project-icons">
-                <a href="#" id="paper-link">
+                <a href="https://arxiv.org/abs/2408.16540">
                     <i class="fa fa-file"></i> <br/>
                     Paper
                 </a>
-                <a href="#" id="code-link">
+                <a href="https://github.com/XiangchenYin/GRPose">
                     <i class="fa fa-github"></i> <br/>
                     Code
                 </a>
+
             </div>
 
             <div class="teaser-image">
                 <img src="src\front.png" style="width:90%;">
-                <p class="caption" align="center"><strong>ChronoTailor</strong> generates temporally consistent videos with fine-grained garment details. Visual comparisons with state-of-the-art methods showcase our framework's superiority in preserving fabric textures and motion continuity.
+                <p class="caption" align="center"><strong>GRPose</strong> generates results by better aligning with pose prior and scaling outputs to 512 × 512 pixels. The first row compares it with ControlNet while the second row visualizes the pose alignment across different base models.
+                    ControlNet exhibits pose alignment in certain body parts such as arms and incorrect actions like handshakes.
                 </p>
+
             </div>
 
             
             <div class="section-title">Abstract</div>
             <div class="content">
-                <p>Video virtual try-on aims to seamlessly replace the clothing of a person in a source video with a target garment. Despite significant progress in this field, existing approaches still struggle to maintain continuity and reproduce garment details.</p>
-                <p>In this paper, we introduce ChronoTailor, a diffusion-based framework that generates temporally consistent videos while preserving fine-grained garment details. By employing a precise spatio-temporal attention mechanism to guide the integration of fine-grained garment features, ChronoTailor achieves robust try-on performance.</p>
-                <p>First, ChronoTailor leverages region-aware spatial guidance to steer the evolution of spatial attention and employs an attention-driven temporal feature fusion mechanism to generate more continuous temporal features. This dual approach not only enables fine-grained local editing but also effectively mitigates artifacts arising from video dynamics.</p>
-                <p>Second, ChronoTailor integrates multi-scale garment features to preserve low-level visual details and incorporates a garment-pose feature alignment to ensure temporal continuity during dynamic motion. Additionally, we collect StyleDress, a new dataset featuring intricate garments, varied environments, and diverse poses, offering advantages over existing public datasets, and will be publicly available for research. Extensive experiments show that ChronoTailor maintains spatio-temporal continuity and preserves garment details during motion, significantly outperforming previous methods.</p>
+                <p>Recent methods using diffusion models have made significant progress in human
+                    image generation with various additional controls such as pose priors.
+                    However, existing approaches still struggle to generate high-quality images with
+                    consistent pose alignment, resulting in unsatisfactory outputs. In this paper,
+                    we propose a framework delving into the graph relations of pose priors to provide
+                    control information for human image generation. </p>
+                <p>The main idea is to establish a graph
+                    topological structure between the pose priors and latent representation of diffusion
+                    models to capture the intrinsic associations between different pose parts.
+                    A Progressive Graph Integrator (PGI) is designed to learn the spatial relationships of
+                    the pose priors with the graph structure, adopting a hierarchical strategy within an
+                    Adapter to gradually propagate information across different pose parts.
+                    A pose perception loss is further introduced based on a pretrained pose estimation
+                    network to minimize the pose differences. Extensive qualitative and quantitative
+                    experiments conducted on the Human-Art and LAION-Human datasets demonstrate that
+                    our model achieves superior performance, with a 9.98% increase in pose average precision
+                    compared to the latest benchmark model.
+                </p>
+
             </div>
 
 
-            <div class="section-title">Overview of ChronoTailor</div>
+            <div class="section-title">Overview of GRPose</div>
             <div class="content">
                 <p>
-                    Our aim is to generate high-quality video virtual try-on results with fine-grained garment details and temporal consistency.
-                    <strong>ChronoTailor</strong> is composed of two key components: 
-                    <strong>(1) Spatial-Temporal Attention Guidance</strong> and <strong>(2) Multi-scale Garment-Pose Feature Alignment</strong>.
+<!--                    <font color=red>50,000</font> images including more than <font color=red>123,000</font> human figures in <font color=red>20 scenarios</font>-->
+                    Our aim is to generate high-quality human images conditioned on pose priors.
+                    Our proposed <strong>GRPose</strong> consists of three main components: <strong>Diffusion Pipeline,
+                    Graph Pose Adapter and Pose Perception Loss</strong>.
                 </p>
 
                 <p>
-                    <strong>(1) Spatial-Temporal Attention Guidance</strong> provides a stable spatial-temporal guidance for garment injection. 
-                    First, we employ segmentation masks <cite>xiong2024sam2</cite> to guide the evolution of the spatial attention map. 
-                    With the aim of attaining an equilibrium of information within and outside the edited region, we further incorporate a regularization term specifically for the attention map, empowering the information injection process to place additional emphasis on unedited regions. 
-                    In addition, we employ an asymmetric cross-space attention mechanism—using original features as queries and features obtained by randomly fusing the current frame with other frames within the video clip as key-values—to effectively integrate temporal information.
-                </p>
-                
-                <p>
-                    <strong>(2) Multi-scale Garment-Pose Feature Alignment</strong> enables the acquisition of more precise garment information during human movement. 
-                    We extract multi-level garment features and fuse them with learnable weights to enhance low-level garment details. 
-                    Additionally, to align garments with poses, the cross-attention modules in the reference and denoising UNets integrate pose and garment features respectively and align them via weight sharing.
-                </p>
-                
-                <p>
-                    Furthermore, we collect <em>StyleDress</em>, a new dataset featuring intricate garments, varied environments, and diverse human poses. 
-                    Comprising 14,258 high-quality images and 12,500 videos, this dataset offers significant advantages over existing public datasets for video virtual try-on research.
+                    Within the entire framework, the Graph Pose Adapter is a trainable component that encodes the pose condition
+                    into a graph structure and integrates it into the Adapter through a hierarchical structure.
+                    At the beginning of each encoder layer in the Adapter, the encoded pose and the current latent representation
+                    are fed into the <strong>Progressive Graph Integrator (PGI)</strong> to capture the topological relationships between different
+                    pose parts through graph learning. This process fine-tunes the Adapter to convey control signals to the SD model,
+                    producing the synthesized image. Additionally, to further encourage alignment of the synthesized output with pose
+                    priors, the <strong>pose perception loss</strong> is formulated using a pre-trained pose estimation network to quantify the pose
+                    differences between outputs and the original images.
                 </p>
                 <img src="src\overview.png" style="width:90%;">
-                <p class="caption" align="center"><strong>Overview of ChronoTailor.</strong> It consists of Diffusion Pipeline, Spatio-Temporal Attention Adapter, and Garment-Pose Alignment Module.
-                    The adapter uses a coupling structure with Progressive Attention Integrator (PAI) to capture spatial-temporal relationships of garment features. The alignment module regularizes pose consistency in the feature space.
+                <p class="caption" align="center"><strong>Overview of Graph Relation Pose (GRPose).</strong> It consists of Diffusion Pipeline, Graph Pose Adapter and Pose Perception Loss.
+                    The Pose Encoder uses a coupling structure in alongside the Progressive Graph Integrator (PGI) to capture graph relationships between different pose parts. The Pose Perception Loss adopts a pre-trained pose estimation network to regularize the pose alignment in the feature space.
                 </p> <br>
 
-                <img src="src\pai.png" style="width:60%;">
+                <img src="src\PGI.png" style="width:60%;">
                 <p class="caption" align="center">
-                    <strong>Details of Progressive Attention Integrator (PAI).</strong> Garment features \( F_g \) and pose-aware temporal features \( F_t \) are fused through multi-head attention, where spatio-temporal graphs are constructed to model both local details and frame-to-frame dependencies.
+                    <strong>Details of Progressive Graph Integrator (PGI).</strong> The pose prior \( x_p \) and
+                    latent representation \( x_l \) are gridded to construct graphs \( \mathcal{G}_p \)
+                    and \( \mathcal{G}_p \) respectively, where GCNs are employed to fuse and update the information.
                 </p>
 
                 <div class="section-title">Visualization of Methods</div>
@@ -229,26 +264,24 @@
                 <div class="glide1">
                     <div class="glide__bullets" data-glide-el="controls[nav]">
                         <button class="glide__bullet" data-glide-dir="=0">Comparison</button>
-                        <button class="glide__bullet" data-glide-dir="=1">Temporal Consistency</button>
-                        <button class="glide__bullet" data-glide-dir="=2">Garment Details</button>
+                        <button class="glide__bullet" data-glide-dir="=1">Tranfer</button>
+                        <button class="glide__bullet" data-glide-dir="=2">Multi-Person</button>
                     </div>
                     <div class="glide__track" data-glide-el="track">
                         <ul class="glide__slides">
                             <li class="glide__slide"><img src="src/compa.png" style="width:70%;">
                                 <p class="caption" align="center">
-                                    <strong>Visual comparison with state-of-the-art methods.</strong> Samples from the StyleDress dataset show ChronoTailor's superiority in garment texture preservation and pose alignment compared to ControlNet, VideoTryOn, and T2I-Adapter.
-                                </p>
+                                    <strong>Visual comparison of ours and other methods.</strong> The samples are from the Human-Art dataset, with each row representing a sample along with its corresponding pose and prompt. Our GRPose, HumanSD, ControlNet, and T2I-Adapter were provided with both a prompt and a pose, while SD1.5 was provided with only a prompt. Our model achieved outstanding results in visual quality and pose alignment.                                </p>
                             </li>
 
-                            <li class="glide__slide"><img src="src/temporal.png" style="width:60%;">
+                            <li class="glide__slide"><img src="src/transfer.png" style="width:60%;">
                                 <p class="caption" align="center">
-                                    <strong>Temporal consistency evaluation.</strong> Our method maintains smooth clothing motion during jumping and walking actions, while other methods exhibit flickering or shape distortion.
-                                </p>
+                                    <strong>Comparison of different base diffusion models for our GRPose.</strong> We compared SD1.5, Anime Art and Realistic models of different styles. GRPose effectively enhances each model with superior pose alignment.                                </p>
                             </li>
 
-                            <li class="glide__slide"><img src="src/details.png" style="width:60%;">
+                            <li class="glide__slide"><img src="src/multi-pose.png" style="width:60%;">
                                 <p class="caption" align="center">
-                                    <strong>Fine-grained garment details.</strong> ChronoTailor reproduces intricate patterns, folds, and fabric textures, as shown in close-up comparisons with baseline models.
+                                    <strong>Results of Multi-Pose Generation.</strong> Our model outperforms ControlNet in generating multiple poses.
                                 </p>
                             </li>
 
@@ -261,20 +294,22 @@
             <div class="section-title">Quantitative Results</div>
             <div class="content">
                 <img src="src\table.png" style="width:80%;">
-                <p class="caption" align="center"><strong>Results on StyleDress and public datasets.</strong> The best results and the second best results are marked in green and blue respectively. ChronoTailor achieves significant improvements in PSNR, SSIM, and pose alignment metrics.
-                </p>
+                <p class="caption" align="center"><strong>Results on Human-Art and LAION-Human datasets.</strong> The best results and the second best results are marked in green and blue respectively. Results marked with asterisk (*) are evaluated on the released models.</p>
             </div>
 
 
 
           <div class="section-title">BibTeX</div>
             <div class="container is-max-desktop content">
-              <pre><code>@article{wang2025chronotailor,
-  title={ChronoTailor: Harnessing Attention Guidance for Fine-Grained Video Virtual Try-On},
-  author={Wang, Jinjuan and Sun, Wenzhang and Li, Ming and Zheng, Yun and Li, Fanyao and Tao, Zhulin and Di, Donglin and Li, Hao and Chen, Wei and Huang, Xianglin},
-  journal={arXiv preprint arXiv:2506.05858},
-  year={2025}
-}
+              <pre><code>@inproceedings{yin2025grpose,
+  title={Grpose: Learning graph relations for human image generation with pose priors},
+  author={Yin, Xiangchen and Di, Donglin and Fan, Lei and Li, Hao and Chen, Wei and , Gouxiaofei and Song, Yang and Sun, Xiao and Yang, Xun},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={39},
+  number={9},
+  pages={9526--9534},
+  year={2025},
+  DOI={10.1609/aaai.v39i9.33032}
 }</code></pre>
             </div>
 
@@ -468,110 +503,165 @@
                 };
             }
 
-            // Garment Models (示例链接，需替换为实际模型地址)
-            var garments = [
-                "https://example.com/garments/dress_01",
-                "https://example.com/garments/shirt_02",
-                "https://example.com/garments/coat_03"
+            // Humans
+            var humans = [
+                "https://superquadrics.com/neural_parts/humans/50002_chicken_wings",
+                "https://superquadrics.com/neural_parts/humans/50002_hips",
+                "https://superquadrics.com/neural_parts/humans/50002_jiggle_on_toes",
+                "https://superquadrics.com/neural_parts/humans/50002_jumping_jacks",
+                "https://superquadrics.com/neural_parts/humans/50002_jumping_jacks_00038",
+                "https://superquadrics.com/neural_parts/humans/50002_jumping_jacks_2",
+                "https://superquadrics.com/neural_parts/humans/50002_knees",
+                "https://superquadrics.com/neural_parts/humans/50004_punching",
+                "https://superquadrics.com/neural_parts/humans/50004_running_on_spot",
+                "https://superquadrics.com/neural_parts/humans/50004_running_on_spot_00220",
+                "https://superquadrics.com/neural_parts/humans/50004_running_on_spot_2",
+                "https://superquadrics.com/neural_parts/humans/50004_running_spot",
+                "https://superquadrics.com/neural_parts/humans/50007_jumping_jacks",
+                "https://superquadrics.com/neural_parts/humans/50009_chicken_wings",
+                "https://superquadrics.com/neural_parts/humans/50009_jumping_jacks",
+                "https://superquadrics.com/neural_parts/humans/50009_jumping_jacks_00140",
+                "https://superquadrics.com/neural_parts/humans/50009_one_leg_jump",
+                "https://superquadrics.com/neural_parts/humans/50009_one_leg_jump_00075",
+                "https://superquadrics.com/neural_parts/humans/50009_shake_hips",
+                "https://superquadrics.com/neural_parts/humans/50020_knees_00136",
+                "https://superquadrics.com/neural_parts/humans/50021_knees",
+                "https://superquadrics.com/neural_parts/humans/50021_knees_2",
+                "https://superquadrics.com/neural_parts/humans/50021_knees_3",
+                "https://superquadrics.com/neural_parts/humans/50021_knees_4",
+                "https://superquadrics.com/neural_parts/humans/50021_knees_5",
+                "https://superquadrics.com/neural_parts/humans/50021_knees_6",
+                "https://superquadrics.com/neural_parts/humans/50021_knees_7",
+                "https://superquadrics.com/neural_parts/humans/50021_one_leg_jump",
+                "https://superquadrics.com/neural_parts/humans/50021_running_on_spot",
+                "https://superquadrics.com/neural_parts/humans/50021_running_on_spot_2",
+                "https://superquadrics.com/neural_parts/humans/50022_punching_00069",
+                "https://superquadrics.com/neural_parts/humans/50022_shake_hips",
+                "https://superquadrics.com/neural_parts/humans/50026_knees",
+                "https://superquadrics.com/neural_parts/humans/50027_jumping_jacks",
+                "https://superquadrics.com/neural_parts/humans/50027_jumping_jacks_2",
+                "https://superquadrics.com/neural_parts/humans/50027_jumping_jacks_3",
+                "https://superquadrics.com/neural_parts/humans/50027_jumping_jacks_4",
+                "https://superquadrics.com/neural_parts/humans/50027_jumping_jacks_5",
             ];
-            var garment_control = show_group(
-                document.getElementById("garments").getElementsByClassName("render_window"),
-                [garments[0], garments[1], garments[2]],
-                8
+            var human_control = show_group(
+                document.getElementById("humans").getElementsByClassName("render_window"),
+                [humans[0], humans[1], humans[2]],
+                6
             );
-            var garment_checkboxes = document.querySelectorAll("#garments .controls input");
-            reset_checkboxes(garment_checkboxes);
-            document.querySelector("#garments .controls").addEventListener(
+            var human_checkboxes = document.querySelectorAll("#humans .controls input");
+            reset_checkboxes(human_checkboxes);
+            document.querySelector("#humans .controls").addEventListener(
                 "change",
                 function (ev) {
-                    if (ev.target.id == "garments_all") {
+                    if (ev.target.id == "humans_all") {
                         Array.prototype.filter.call(
-                            garment_checkboxes,
-                            (el) => el.id != "garments_all"
+                            human_checkboxes,
+                            (el) => el.id != "humans_all"
                         ).forEach(function (el) {el.checked = false;});
                     } else if (ev.target.checked) {
-                        garment_checkboxes[0].checked = false;
+                        human_checkboxes[0].checked = false;
                     }
 
                     var ids = new Set();
-                    if (garment_checkboxes[0].checked) {
-                        ids = new Set([0, 1, 2, 3, 4, 5, 6, 7]);
+                    if (human_checkboxes[0].checked) {
+                        ids = new Set([0, 1, 2, 3, 4, 5]);
                     }
-                    var part_ids = [1, 2, 0, 4, 3, 6, 5, 7];
-                    for (var i=1; i<garment_checkboxes.length; i++) {
-                        if (garment_checkboxes[i].checked) {
+                    var part_ids = [1, 2, 0, 4, 3, 5];
+                    for (var i=1; i<human_checkboxes.length; i++) {
+                        if (human_checkboxes[i].checked) {
                             ids.add(part_ids[i-1]);
                         }
                     }
 
-                    garment_control.show(Array.from(ids));
+                    human_control.show(Array.from(ids));
                 }
             );
-            document.querySelector("#garments .controls button").addEventListener(
+            document.querySelector("#humans .controls button").addEventListener(
                 "click",
                 function (ev) {
-                    reset_checkboxes(garment_checkboxes);
-                    var new_garments = random_choice(garments, 3);
-                    var render_windows = document.getElementById("garments").getElementsByClassName("render_window");
+                    reset_checkboxes(human_checkboxes);
+                    var new_humans = random_choice(humans, 3);
+                    var render_windows = document.getElementById("humans").getElementsByClassName("render_window");
                     Array.prototype.forEach.call(render_windows, function (r) {r.innerHTML = "";});
-                    garment_control = show_group(
+                    human_control = show_group(
                         render_windows,
-                        new_garments,
-                        8
+                        new_humans,
+                        6
                     );
                 }
             );
 
-            // Motion Models (示例链接，需替换为实际模型地址)
-            var motions = [
-                "https://example.com/motions/walking",
-                "https://example.com/motions/jumping",
-                "https://example.com/motions/dancing"
+            // Planes
+            var planes = [
+                "https://superquadrics.com/neural_parts/planes/10af5de930178a161596c26b5af806fe",
+                "https://superquadrics.com/neural_parts/planes/1a32f10b20170883663e90eaf6b4ca52",
+                "https://superquadrics.com/neural_parts/planes/1a6ad7a24bb89733f412783097373bdc",
+                "https://superquadrics.com/neural_parts/planes/1b3c6b2fbcf834cf62b600da24e0965",
+                "https://superquadrics.com/neural_parts/planes/1c26ecb4cd01759dc1006ed55bc1a3fc",
+                "https://superquadrics.com/neural_parts/planes/284e6431669d46fd44797ce00623b3fd",
+                "https://superquadrics.com/neural_parts/planes/2c3ba3f35c5d2b0ce77e43d0a92bdc06",
+                "https://superquadrics.com/neural_parts/planes/315f523d0a924fb7ef70df8610b582b2",
+                "https://superquadrics.com/neural_parts/planes/343a607d1604335fb4f192eea1889928",
+                "https://superquadrics.com/neural_parts/planes/347d86d7001cef01232236eecec447b",
+                "https://superquadrics.com/neural_parts/planes/351c9235749e398162147e00e97e28b5",
+                "https://superquadrics.com/neural_parts/planes/3716ed4fa80dbf5f41392ab7a601818b",
+                "https://superquadrics.com/neural_parts/planes/384e72f69e6f24404cb288947cda4a2c",
+                "https://superquadrics.com/neural_parts/planes/440ac1b4ac3cbe114c3a35cee92bb95b",
+                "https://superquadrics.com/neural_parts/planes/440e5ba74ac8124e9751c7a6f15617f4",
+                "https://superquadrics.com/neural_parts/planes/48706d323b9041d5438a95791ca4064d",
+                "https://superquadrics.com/neural_parts/planes/563cef4df464ddb1e153dd90dac45a6d",
+                "https://superquadrics.com/neural_parts/planes/5c6590461085c93ea91e80f26309099e",
+                "https://superquadrics.com/neural_parts/planes/60b5f5da40e0dd33579f6385fdd4245b",
+                "https://superquadrics.com/neural_parts/planes/7b134f6573e7270fb0a79e28606cb167",
+                "https://superquadrics.com/neural_parts/planes/92a83ecaa10e8d3f78e919a72d9a39e7",
+                "https://superquadrics.com/neural_parts/planes/ed2aaca045fb1714cd4229f38ad0d015",
+                "https://superquadrics.com/neural_parts/planes/f12eefbbefabe566ca8607f540cc62ba",
             ];
-            var motion_control = show_group(
-                document.getElementById("motions").getElementsByClassName("render_window"),
-                [motions[0], motions[1], motions[2]],
-                12
+            var plane_control = show_group(
+                document.getElementById("planes").getElementsByClassName("render_window"),
+                [planes[7], planes[1], planes[2]],
+                5
             );
-            var motion_checkboxes = document.querySelectorAll("#motions .controls input");
-            reset_checkboxes(motion_checkboxes);
-            document.querySelector("#motions .controls").addEventListener(
+            var plane_checkboxes = document.querySelectorAll("#planes .controls input");
+            reset_checkboxes(plane_checkboxes);
+            document.querySelector("#planes .controls").addEventListener(
                 "change",
                 function (ev) {
-                    if (ev.target.id == "motions_all") {
+                    if (ev.target.id == "planes_all") {
                         Array.prototype.filter.call(
-                            motion_checkboxes,
-                            (el) => el.id != "motions_all"
+                            plane_checkboxes,
+                            (el) => el.id != "planes_all"
                         ).forEach(function (el) {el.checked = false;});
                     } else if (ev.target.checked) {
-                        motion_checkboxes[0].checked = false;
+                        plane_checkboxes[0].checked = false;
                     }
 
                     var ids = new Set();
-                    if (motion_checkboxes[0].checked) {
-                        ids = new Set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]);
+                    if (plane_checkboxes[0].checked) {
+                        ids = new Set([0, 1, 2, 3, 4]);
                     }
-                    var part_ids = [3, 4, 0, 1, 2, 7, 8, 5, 6, 11, 9, 10];
-                    for (var i=1; i<motion_checkboxes.length; i++) {
-                        if (motion_checkboxes[i].checked) {
+                    var part_ids = [4, 0, 3, 2, 1];
+                    for (var i=1; i<plane_checkboxes.length; i++) {
+                        if (plane_checkboxes[i].checked) {
                             ids.add(part_ids[i-1]);
                         }
                     }
 
-                    motion_control.show(Array.from(ids));
+                    plane_control.show(Array.from(ids));
                 }
             );
-            document.querySelector("#motions .controls button").addEventListener(
+            document.querySelector("#planes .controls button").addEventListener(
                 "click",
                 function (ev) {
-                    reset_checkboxes(motion_checkboxes);
-                    var new_motions = random_choice(motions, 3);
-                    var render_windows = document.getElementById("motions").getElementsByClassName("render_window");
+                    reset_checkboxes(plane_checkboxes);
+                    var new_planes = random_choice(planes, 3);
+                    var render_windows = document.getElementById("planes").getElementsByClassName("render_window");
                     Array.prototype.forEach.call(render_windows, function (r) {r.innerHTML = "";});
-                    motion_control = show_group(
+                    plane_control = show_group(
                         render_windows,
-                        new_motions,
-                        12
+                        new_planes,
+                        5
                     );
                 }
             );
@@ -586,7 +676,7 @@
             }).mount();
         </script>
         <script>
-            // 保留其他轮播组件以备扩展
+            // Make the carousel for the comparisons
             var glide2 = new Glide(".glide2", {
                 type: "carousel",
                 startAt: 0,
@@ -595,6 +685,7 @@
             }).mount();
         </script>
         <script>
+            // Make the carousel for the comparisons
             var glide3 = new Glide(".glide3", {
                 type: "carousel",
                 startAt: 0,
