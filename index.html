@@ -1,10 +1,10 @@
 <!Doctype html>
 <html lang="en">
     <head>
-        <title>GRPose: Learning Graph Relations for Human Image Generation with Pose Priors</title>
+        <title>ChronoTailor: Harnessing Attention Guidance for Fine-Grained Video Virtual Try-On</title>
 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta name="author" content="Despoina Paschalidou">
+        <meta name="author" content="Jinjuan Wang, Wenzhang Sun, Ming Li, et al.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 <!--        <link rel="icon" type="image/png" href="data/bunny.png"/>-->
 
@@ -105,37 +105,40 @@
 <!--            <img src="src\logo_image_final.jpg" style="width:40%;">-->
             
             <h1 class="project-title">
-                GRPose: Learning Graph Relations for Human Image Generation with Pose Priors
+                ChronoTailor: Harnessing Attention Guidance for Fine-Grained Video Virtual Try-On
             </h1>
             
             <div class="authors">
 
                 <a href="">
-                    Xiangchen Yin <sup>1,5</sup>
+                    Jinjuan Wang <sup>1,*</sup>
+                </a>
+                <a href="">
+                    Wenzhang Sun <sup>2,*</sup>
+                </a>
+                <a href="">
+                    Ming Li <sup>1</sup>
+                </a>
+                <a href="">
+                    Yun Zheng <sup>1</sup>
+                </a>
+                <a href="">
+                    Fanyao Li <sup>1</sup>
+                </a>
+                <a href="">
+                    Zhulin Tao <sup>1,†</sup>
                 </a>
                 <a href="">
                     Donglin Di <sup>2</sup>
                 </a>
                 <a href="">
-                    Lei Fan <sup>3</sup>
-                </a>
-                <a href="">
                     Hao Li <sup>2</sup>
                 </a>
                 <a href="">
-                    Wei Chen <sup>2</sup>
+                    Chen Wei <sup>2</sup>
                 </a>
                 <a href="">
-                    Xiaofei Gou <sup>2</sup>
-                </a>
-                <a href="">
-                    Yang Song <sup>3</sup>
-                </a>
-                <a href="">
-                    Xiao Sun <sup>4</sup>
-                </a>
-                <a href="">
-                    Xun Yang <sup>1</sup>
+                    Xianglin Huang <sup>1</sup>
                 </a>
 
 
@@ -143,88 +146,46 @@
 
             <div class="affiliations">
                 <span><sup>1</sup> 
-                    <a href=https://www.ustc.edu.cn//>
-                    University of Science and Technology of China
+                    <a href="https://www.cuc.edu.cn">
+                    Communication University of China
                     </a>
                 </span>
 
                 <span><sup>2</sup> 
                     <a href="">
-                    Space AI, Li Auto
+                    Li Auto
                     </a>
                 </span>
-
-                <br>
-
-                <span><sup>3</sup>
-                    <a href=https://www.unsw.edu.au//>
-                    University of New South Wales
-                    </a>
-                </span>
-
-                <span><sup>4</sup>
-                    <a href=https://www.hfut.edu.cn//>
-                    Hefei University of Technology
-                    </a>
-                </span>
-
-                <br>
-
-                <span><sup>5</sup>
-                    <a href="">
-                    Institute of Artificial Intelligence, Hefei Comprehensive National Science Center
-                    </a>
-                </span>
-
-
             </div>
 
             <div class="project-conference">
-                AAAI 2025
+                <!-- 会议信息可根据实际情况添加，如：CVPR 2025 -->
             </div>
 
             <div class="project-icons">
-                <a href="https://arxiv.org/abs/2408.16540">
+                <a href="#" id="paper-link">
                     <i class="fa fa-file"></i> <br/>
                     Paper
                 </a>
-                <a href="https://github.com/XiangchenYin/GRPose">
+                <a href="#" id="code-link">
                     <i class="fa fa-github"></i> <br/>
                     Code
                 </a>
-
             </div>
 
             <div class="teaser-image">
                 <img src="src\front.png" style="width:90%;">
-                <p class="caption" align="center"><strong>GRPose</strong> generates results by better aligning with pose prior and scaling outputs to 512 × 512 pixels. The first row compares it with ControlNet while the second row visualizes the pose alignment across different base models.
-                    ControlNet exhibits pose alignment in certain body parts such as arms and incorrect actions like handshakes.
+                <p class="caption" align="center"><strong>ChronoTailor</strong> generates temporally consistent videos with fine-grained garment details. Visual comparisons with state-of-the-art methods showcase our framework's superiority in preserving fabric textures and motion continuity.
                 </p>
-
             </div>
 
             
             <div class="section-title">Abstract</div>
             <div class="content">
-                <p>Recent methods using diffusion models have made significant progress in human
-                    image generation with various additional controls such as pose priors.
-                    However, existing approaches still struggle to generate high-quality images with
-                    consistent pose alignment, resulting in unsatisfactory outputs. In this paper,
-                    we propose a framework delving into the graph relations of pose priors to provide
-                    control information for human image generation. </p>
-                <p>The main idea is to establish a graph
-                    topological structure between the pose priors and latent representation of diffusion
-                    models to capture the intrinsic associations between different pose parts.
-                    A Progressive Graph Integrator (PGI) is designed to learn the spatial relationships of
-                    the pose priors with the graph structure, adopting a hierarchical strategy within an
-                    Adapter to gradually propagate information across different pose parts.
-                    A pose perception loss is further introduced based on a pretrained pose estimation
-                    network to minimize the pose differences. Extensive qualitative and quantitative
-                    experiments conducted on the Human-Art and LAION-Human datasets demonstrate that
-                    our model achieves superior performance, with a 9.98% increase in pose average precision
-                    compared to the latest benchmark model.
-                </p>
-
+                <p>Video virtual try-on aims to seamlessly replace the clothing of a person in a source video with a target garment. Despite significant progress in this field, existing approaches still struggle to maintain continuity and reproduce garment details.</p>
+                <p>In this paper, we introduce ChronoTailor, a diffusion-based framework that generates temporally consistent videos while preserving fine-grained garment details. By employing a precise spatio-temporal attention mechanism to guide the integration of fine-grained garment features, ChronoTailor achieves robust try-on performance.</p>
+                <p>First, ChronoTailor leverages region-aware spatial guidance to steer the evolution of spatial attention and employs an attention-driven temporal feature fusion mechanism to generate more continuous temporal features. This dual approach not only enables fine-grained local editing but also effectively mitigates artifacts arising from video dynamics.</p>
+                <p>Second, ChronoTailor integrates multi-scale garment features to preserve low-level visual details and incorporates a garment-pose feature alignment to ensure temporal continuity during dynamic motion. Additionally, we collect StyleDress, a new dataset featuring intricate garments, varied environments, and diverse poses, offering advantages over existing public datasets, and will be publicly available for research. Extensive experiments show that ChronoTailor maintains spatio-temporal continuity and preserves garment details during motion, significantly outperforming previous methods.</p>
             </div>
 
 
@@ -301,15 +262,12 @@
 
           <div class="section-title">BibTeX</div>
             <div class="container is-max-desktop content">
-              <pre><code>@inproceedings{yin2025grpose,
-  title={Grpose: Learning graph relations for human image generation with pose priors},
-  author={Yin, Xiangchen and Di, Donglin and Fan, Lei and Li, Hao and Chen, Wei and , Gouxiaofei and Song, Yang and Sun, Xiao and Yang, Xun},
-  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
-  volume={39},
-  number={9},
-  pages={9526--9534},
-  year={2025},
-  DOI={10.1609/aaai.v39i9.33032}
+              <pre><code>@article{wang2025chronotailor,
+  title={ChronoTailor: Harnessing Attention Guidance for Fine-Grained Video Virtual Try-On},
+  author={Wang, Jinjuan and Sun, Wenzhang and Li, Ming and Zheng, Yun and Li, Fanyao and Tao, Zhulin and Di, Donglin and Li, Hao and Chen, Wei and Huang, Xianglin},
+  journal={arXiv preprint arXiv:2506.05858},
+  year={2025}
+}
 }</code></pre>
             </div>
 
