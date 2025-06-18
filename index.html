@@ -111,10 +111,10 @@
             <div class="authors">
 
                 <a href="">
-                    Jinjuan Wang <sup>1,*</sup>
+                    Jinjuan Wang <sup>1*</sup>
                 </a>
                 <a href="">
-                    Wenzhang Sun <sup>2,*</sup>
+                    Wenzhang Sun <sup>2*</sup>
                 </a>
                 <a href="">
                     Ming Li <sup>1</sup>
@@ -126,7 +126,7 @@
                     Fanyao Li <sup>1</sup>
                 </a>
                 <a href="">
-                    Zhulin Tao <sup>1,†</sup>
+                    Zhulin Tao <sup>1†</sup>
                 </a>
                 <a href="">
                     Donglin Di <sup>2</sup>
@@ -135,7 +135,7 @@
                     Hao Li <sup>2</sup>
                 </a>
                 <a href="">
-                    Chen Wei <sup>2</sup>
+                    Wei Chen <sup>2</sup>
                 </a>
                 <a href="">
                     Xianglin Huang <sup>1</sup>
@@ -189,24 +189,15 @@
             </div>
 
 
-            <div class="section-title">Overview of GRPose</div>
+            <div class="section-title">Overview of ChronoTailor</div>
             <div class="content">
                 <p>
 <!--                    <font color=red>50,000</font> images including more than <font color=red>123,000</font> human figures in <font color=red>20 scenarios</font>-->
-                    Our aim is to generate high-quality human images conditioned on pose priors.
-                    Our proposed <strong>GRPose</strong> consists of three main components: <strong>Diffusion Pipeline,
-                    Graph Pose Adapter and Pose Perception Loss</strong>.
+                    ChronoTailor  consists of two main components: (1) Spatial-Temporal Attention Guidance, which includes Region-Aware Spatial Guidance (RASG) that uses segmentation masks to guide spatial attention map evolution, and Attention-Driven Temporal Feature Fusion (ATFF), which employs an asymmetric cross-space attention mechanism using original features as queries and randomly fused other frame features as key-values to integrate temporal information effectively. 
                 </p>
 
                 <p>
-                    Within the entire framework, the Graph Pose Adapter is a trainable component that encodes the pose condition
-                    into a graph structure and integrates it into the Adapter through a hierarchical structure.
-                    At the beginning of each encoder layer in the Adapter, the encoded pose and the current latent representation
-                    are fed into the <strong>Progressive Graph Integrator (PGI)</strong> to capture the topological relationships between different
-                    pose parts through graph learning. This process fine-tunes the Adapter to convey control signals to the SD model,
-                    producing the synthesized image. Additionally, to further encourage alignment of the synthesized output with pose
-                    priors, the <strong>pose perception loss</strong> is formulated using a pre-trained pose estimation network to quantify the pose
-                    differences between outputs and the original images.
+                    (2) Multi-scale Garment-Pose Feature Alignment, which first applies Adaptive Multi-scale Feature Extraction (AMFE) to enhance low-level garment details, and then aligns garment features with pose features using Garment-Pose Feature Alignment (GPFA).
                 </p>
                 <img src="src\overview.png" style="width:90%;">
                 <p class="caption" align="center"><strong>Overview of Graph Relation Pose (GRPose).</strong> It consists of Diffusion Pipeline, Graph Pose Adapter and Pose Perception Loss.
