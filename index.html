@@ -193,13 +193,26 @@
             <div class="content">
                 <p>
                     Our aim is to generate high-quality video virtual try-on results with fine-grained garment details and temporal consistency.
-                    Our proposed <strong>ChronoTailor</strong> consists of three main components: <strong>Diffusion Pipeline, Spatio-Temporal Attention Adapter, and Garment-Pose Alignment Module</strong>.
+                    <strong>ChronoTailor</strong> is composed of two key components: 
+                    <strong>(1) Spatial-Temporal Attention Guidance</strong> and <strong>(2) Multi-scale Garment-Pose Feature Alignment</strong>.
                 </p>
 
                 <p>
-                    Within the entire framework, the Spatio-Temporal Attention Adapter encodes garment and pose conditions into a unified feature space, integrating them through a hierarchical attention mechanism.
-                    At each diffusion step, the encoded features and temporal context are fed into the <strong>Progressive Attention Integrator (PAI)</strong> to capture both spatial relationships of garment parts and temporal dynamics across frames. This process fine-tunes the diffusion model to generate try-on results that align with target garments and maintain motion continuity.
-                    Additionally, the <strong>garment-pose alignment module</strong> uses a pre-trained pose estimation network to ensure that the generated clothing moves naturally with the human body during dynamic actions.
+                    <strong>(1) Spatial-Temporal Attention Guidance</strong> provides a stable spatial-temporal guidance for garment injection. 
+                    First, we employ segmentation masks <cite>xiong2024sam2</cite> to guide the evolution of the spatial attention map. 
+                    With the aim of attaining an equilibrium of information within and outside the edited region, we further incorporate a regularization term specifically for the attention map, empowering the information injection process to place additional emphasis on unedited regions. 
+                    In addition, we employ an asymmetric cross-space attention mechanism—using original features as queries and features obtained by randomly fusing the current frame with other frames within the video clip as key-values—to effectively integrate temporal information.
+                </p>
+                
+                <p>
+                    <strong>(2) Multi-scale Garment-Pose Feature Alignment</strong> enables the acquisition of more precise garment information during human movement. 
+                    We extract multi-level garment features and fuse them with learnable weights to enhance low-level garment details. 
+                    Additionally, to align garments with poses, the cross-attention modules in the reference and denoising UNets integrate pose and garment features respectively and align them via weight sharing.
+                </p>
+                
+                <p>
+                    Furthermore, we collect <em>StyleDress</em>, a new dataset featuring intricate garments, varied environments, and diverse human poses. 
+                    Comprising 14,258 high-quality images and 12,500 videos, this dataset offers significant advantages over existing public datasets for video virtual try-on research.
                 </p>
                 <img src="src\overview.png" style="width:90%;">
                 <p class="caption" align="center"><strong>Overview of ChronoTailor.</strong> It consists of Diffusion Pipeline, Spatio-Temporal Attention Adapter, and Garment-Pose Alignment Module.
