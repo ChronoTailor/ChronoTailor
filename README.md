@@ -2,7 +2,7 @@
 ChronoTailor: Harnessing Attention Guidance for Fine-Grained Video Virtual Try-On
 
 [![arXiv](https://img.shields.io/badge/arXiv-2506.05858-b31b1b.svg)]([https://arxiv.org/abs/2506.05858])
-[![Project Page](https://img.shields.io/badge/Project-Website-green)]([https://chronotailor.github.io/ChronoTailor/])
+[![Project Page](https://img.shields.io/badge/Project-Website-green)]([https://chronotailor.github.io/ChronoTailor/#])
 
 ## BibTeX
 ```text
