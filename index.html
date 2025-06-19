@@ -255,89 +255,244 @@
                 </div>
 
                 <br>
-            <div class="section-title">More Results</div>
+        <div class="section-title">More Results</div>
             <div class="glide1">
+                <!-- 动态生成的轮播指示器（10个视频对应10个按钮） -->
+                <div class="glide__bullets" data-glide-el="controls[nav]" style="display: flex; justify-content: center; gap: 8px; margin: 15px 0;">
+                    <button class="glide__bullet glide__bullet--active" data-glide-dir="=0"></button>
+                    <button class="glide__bullet" data-glide-dir="=1"></button>
+                    <button class="glide__bullet" data-glide-dir="=2"></button>
+                    <button class="glide__bullet" data-glide-dir="=3"></button>
+                    <button class="glide__bullet" data-glide-dir="=4"></button>
+                    <button class="glide__bullet" data-glide-dir="=5"></button>
+                    <button class="glide__bullet" data-glide-dir="=6"></button>
+                    <button class="glide__bullet" data-glide-dir="=7"></button>
+                    <button class="glide__bullet" data-glide-dir="=8"></button>
+                    <button class="glide__bullet" data-glide-dir="=9"></button>
+                </div>
+                
                 <div class="glide__track" data-glide-el="track">
-                    <ul class="glide__slides" id="videoSlides">
-                        <!-- 视频将通过JS动态插入 -->
+                    <ul class="glide__slides">
+                        <!-- 视频1 -->
+                        <li class="glide__slide">
+                            <div class="video-container">
+                                <video data-src="src/6月19日-1.mp4" 
+                                       class="video-item"
+                                       style="width: 70%; border-radius: 8px;"
+                                       poster="src/thumbnails/6月19日-1.jpg">
+                                    <div class="video-fallback">
+                                        <i class="fas fa-video"></i>
+                                        <p>视频加载失败，请检查格式或路径</p>
+                                    </div>
+                                </video>
+                                <div class="video-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                            <p class="caption" align="center">
+                                <strong>Visual comparison of ours and other methods.</strong> Our method demonstrates superior capability in generating clearer texture details within the editing region, producing more plausible results that exhibit enhanced visual fidelity and structural coherence.                             
+                            </p>
+                        </li>
+                        
+                        <!-- 视频2 -->
+                        <li class="glide__slide">
+                            <div class="video-container">
+                                <video data-src="src/6月19日-2.mp4" 
+                                       class="video-item"
+                                       style="width: 60%; border-radius: 8px;"
+                                       poster="src/thumbnails/6月19日-2.jpg">
+                                    <div class="video-fallback">
+                                        <i class="fas fa-video"></i>
+                                        <p>视频加载失败，请检查格式或路径</p>
+                                    </div>
+                                </video>
+                                <div class="video-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                            <p class="caption" align="center">
+                                <strong>Qualitative comparison on the VITON-HD dataset.</strong> 
+                            </p>
+                        </li>
+                        
+                        <!-- 视频3 -->
+                        <li class="glide__slide">
+                            <div class="video-container">
+                                <video data-src="src/6月19日-3.mp4" 
+                                       class="video-item"
+                                       style="width: 60%; border-radius: 8px;"
+                                       poster="src/thumbnails/6月19日-3.jpg">
+                                    <div class="video-fallback">
+                                        <i class="fas fa-video"></i>
+                                        <p>视频加载失败，请检查格式或路径</p>
+                                    </div>
+                                </video>
+                                <div class="video-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                            <p class="caption" align="center">
+                                <strong>ChronoTailor effectively preserves information in non - edited regions.</strong> 
+                            </p>
+                        </li>
+                        
+                        <!-- 视频4 -->
+                        <li class="glide__slide">
+                            <div class="video-container">
+                                <video data-src="src/6月19日-4.mp4" 
+                                       class="video-item"
+                                       style="width: 60%; border-radius: 8px;"
+                                       poster="src/thumbnails/6月19日-4.jpg">
+                                    <div class="video-fallback">
+                                        <i class="fas fa-video"></i>
+                                        <p>视频加载失败，请检查格式或路径</p>
+                                    </div>
+                                </video>
+                                <div class="video-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                            <p class="caption" align="center">
+                                <strong>Qualitative results of our method on the StyleDress dataset.</strong> 
+                            </p>
+                        </li>
+                        
+                        <!-- 视频5 -->
+                        <li class="glide__slide">
+                            <div class="video-container">
+                                <video data-src="src/6月19日-5.mp4" 
+                                       class="video-item"
+                                       style="width: 60%; border-radius: 8px;"
+                                       poster="src/thumbnails/6月19日-5.jpg">
+                                    <div class="video-fallback">
+                                        <i class="fas fa-video"></i>
+                                        <p>视频加载失败，请检查格式或路径</p>
+                                    </div>
+                                </video>
+                                <div class="video-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                            <p class="caption" align="center">
+                                <strong>Ablation study of Adaptive Multi-scale Feature Extraction. The upper garment try-on fully recovers two floral patterns, demonstrating ChronoTailor’s capability to preserve intricate textures and semantic details.</strong> 
+                            </p>
+                        </li>
+                        
+                        <!-- 视频6 -->
+                        <li class="glide__slide">
+                            <div class="video-container">
+                                <video data-src="src/6月19日-6.mp4" 
+                                       class="video-item"
+                                       style="width: 60%; border-radius: 8px;"
+                                       poster="src/thumbnails/6月19日-6.jpg">
+                                    <div class="video-fallback">
+                                        <i class="fas fa-video"></i>
+                                        <p>视频加载失败，请检查格式或路径</p>
+                                    </div>
+                                </video>
+                                <div class="video-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                            <p class="caption" align="center">
+                                <strong>Ablation study of Attention-Driven Temporal Feature Fusion.</strong> 
+                            </p>
+                        </li>
+                        
+                        <!-- 视频7 -->
+                        <li class="glide__slide">
+                            <div class="video-container">
+                                <video data-src="src/6月19日-7.mp4" 
+                                       class="video-item"
+                                       style="width: 60%; border-radius: 8px;"
+                                       poster="src/thumbnails/6月19日-7.jpg">
+                                    <div class="video-fallback">
+                                        <i class="fas fa-video"></i>
+                                        <p>视频加载失败，请检查格式或路径</p>
+                                    </div>
+                                </video>
+                                <div class="video-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                            <p class="caption" align="center">
+                                <strong>Ablation study of Region-Aware Spatial Guidance.</strong> Our method balances attention between editing and non - editing regions. 
+                            </p>
+                        </li>
+                        
+                        <!-- 视频8 -->
+                        <li class="glide__slide">
+                            <div class="video-container">
+                                <video data-src="src/6月19日-8.mp4" 
+                                       class="video-item"
+                                       style="width: 60%; border-radius: 8px;"
+                                       poster="src/thumbnails/6月19日-8.jpg">
+                                    <div class="video-fallback">
+                                        <i class="fas fa-video"></i>
+                                        <p>视频加载失败，请检查格式或路径</p>
+                                    </div>
+                                </video>
+                                <div class="video-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                            <p class="caption" align="center">
+                                <!-- 可根据视频内容补充标题 -->
+                            </p>
+                        </li>
+                        
+                        <!-- 视频9 -->
+                        <li class="glide__slide">
+                            <div class="video-container">
+                                <video data-src="src/6月19日-9.mp4" 
+                                       class="video-item"
+                                       style="width: 60%; border-radius: 8px;"
+                                       poster="src/thumbnails/6月19日-9.jpg">
+                                    <div class="video-fallback">
+                                        <i class="fas fa-video"></i>
+                                        <p>视频加载失败，请检查格式或路径</p>
+                                    </div>
+                                </video>
+                                <div class="video-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                            <p class="caption" align="center">
+                                <!-- 可根据视频内容补充标题 -->
+                            </p>
+                        </li>
+                        
+                        <!-- 视频10 -->
+                        <li class="glide__slide">
+                            <div class="video-container">
+                                <video data-src="src/6月19日-10.mp4" 
+                                       class="video-item"
+                                       style="width: 60%; border-radius: 8px;"
+                                       poster="src/thumbnails/6月19日-10.jpg">
+                                    <div class="video-fallback">
+                                        <i class="fas fa-video"></i>
+                                        <p>视频加载失败，请检查格式或路径</p>
+                                    </div>
+                                </video>
+                                <div class="video-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                            <p class="caption" align="center">
+                                <!-- 可根据视频内容补充标题 -->
+                            </p>
+                        </li>
                     </ul>
                 </div>
-                
-                <!-- 自定义轮播控制按钮 -->
-                <div class="glide__arrows" data-glide-el="controls">
-                    <div class="glide__arrow glide__arrow--left">
-                        <i class="fa fa-angle-left" aria-hidden="true"></i>
-                    </div>
-                    <div class="glide__arrow glide__arrow--right">
-                        <i class="fa fa-angle-right" aria-hidden="true"></i>
-                    </div>
-                </div>
-                
-                <!-- 轮播指示器 -->
-                <div class="glide__bullets" data-glide-el="controls[nav]"></div>
             </div>
             
             <!-- 引入依赖 -->
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
             <link rel="stylesheet" href="https://unpkg.com/@glidejs/glide/dist/css/glide.core.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
             <script src="https://unpkg.com/@glidejs/glide"></script>
             
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
-                    // 视频数据（包含名称和标题）
-                    const videoData = [
-                        { name: "00126_00.mp4", title: "时空注意力引导效果" },
-                        { name: "1221638_in_xl.mp4", title: "多尺度特征对齐结果" },
-                        { name: "1221638_in_xl_2.mp4", title: "StyleDress数据集示例" },
-                        { name: "1223307_in_xl.mp4", title: "消融实验 - AMFE模块" },
-                        { name: "1224618_in_xl.mp4", title: "消融实验 - ATFF模块" },
-                        { name: "1225120_in_xl.mp4", title: "区域感知空间引导" },
-                        { name: "1229233_in_xl.mp4", title: "复杂纹理生成" },
-                        { name: "1232939_in_xl.mp4", title: "动态姿势一致性" },
-                        { name: "1238040_in_xl.mp4", title: "多人物场景生成" },
-                        { name: "1254417_in_xl.mp4", title: "真实环境应用" }
-                    ];
-                    
-                    const videoSlides = document.getElementById('videoSlides');
-                    const bulletsContainer = document.querySelector('.glide__bullets');
-                    
-                    // 动态插入视频
-                    videoData.forEach((video, index) => {
-                        const li = document.createElement('li');
-                        li.className = 'glide__slide';
-                        
-                        // 创建视频加载占位元素
-                        const videoPlaceholder = document.createElement('div');
-                        videoPlaceholder.className = 'video-placeholder';
-                        videoPlaceholder.innerHTML = `
-                            <div class="loading-spinner"></div>
-                            <div class="video-title">${video.title}</div>
-                        `;
-                        
-                        li.innerHTML = `
-                            <div class="video-container">
-                                ${videoPlaceholder.outerHTML}
-                                <video data-index="${index}" 
-                                       src="src/${video.name}" 
-                                       class="video-item"
-                                       style="width: 100%; max-width: 800px; border-radius: 12px;"
-                                       poster="src/thumbnails/${video.name.replace('.mp4', '.jpg')}"
-                                       onloadeddata="this.parentElement.querySelector('.video-placeholder').style.display='none'">
-                                    您的浏览器不支持视频播放，请升级浏览器或使用Chrome/Firefox。
-                                </video>
-                            </div>
-                        `;
-                        
-                        videoSlides.appendChild(li);
-                        
-                        // 创建轮播指示器
-                        const bullet = document.createElement('button');
-                        bullet.className = `glide__bullet${index === 0 ? ' glide__bullet--active' : ''}`;
-                        bullet.setAttribute('data-glide-dir', `=${index}`);
-                        bullet.setAttribute('aria-label', `Go to video ${index + 1}`);
-                        bulletsContainer.appendChild(bullet);
-                    });
-                    
                     // 初始化轮播
                     const glide = new Glide('.glide1', {
                         type: 'carousel',
@@ -345,26 +500,31 @@
                         perView: 1,
                         autoplay: 5000,       // 5秒自动切换
                         animationDuration: 500,// 切换动画时长
-                        gap: 40,              // 视频间距
+                        gap: 20,              // 视频间距
                         keyboard: true,       // 启用键盘导航
-                        touch: true,          // 启用触摸滑动
-                        focusAt: 'center'     // 视频居中
+                        touch: true           // 启用触摸滑动
                     });
                     
                     glide.mount();
                     
-                    // 视频悬停效果
-                    document.querySelectorAll('.video-item').forEach(video => {
-                        video.addEventListener('mouseenter', function() {
-                            if (this.loop && this.autoplay) {
-                                this.pause();
-                            }
+                    // 视频加载逻辑
+                    const videos = document.querySelectorAll('.video-item');
+                    videos.forEach(video => {
+                        // 延迟加载视频，提高页面加载速度
+                        const src = video.getAttribute('data-src');
+                        video.src = src;
+                        
+                        // 显示加载状态
+                        const loading = video.parentElement.querySelector('.video-loading');
+                        const fallback = video.querySelector('.video-fallback');
+                        
+                        video.addEventListener('loadeddata', function() {
+                            loading.style.display = 'none';
                         });
                         
-                        video.addEventListener('mouseleave', function() {
-                            if (this.loop && this.autoplay) {
-                                this.play();
-                            }
+                        video.addEventListener('error', function() {
+                            loading.style.display = 'none';
+                            fallback.style.display = 'flex';
                         });
                     });
                 });
@@ -375,7 +535,6 @@
                     text-align: center;
                     font-size: 24px;
                     margin: 30px 0 20px;
-                    color: #333;
                     position: relative;
                 }
                 .section-title:after {
@@ -387,115 +546,90 @@
                     margin: 10px auto 0;
                 }
                 
-                .glide1 {
-                    position: relative;
-                    max-width: 100%;
-                    margin: 0 auto;
-                }
-                
-                .video-container {
-                    position: relative;
-                    padding-bottom: 56.25%; /* 16:9 视频比例 */
-                    overflow: hidden;
-                    border-radius: 12px;
-                    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-                    background: #000;
-                }
-                
-                .video-container video {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                    transition: opacity 0.3s;
-                }
-                
-                .video-placeholder {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    background: #000;
-                    z-index: 1;
-                }
-                
-                .loading-spinner {
-                    width: 60px;
-                    height: 60px;
-                    border: 5px solid rgba(255,255,255,0.1);
-                    border-top-color: #4a90e2;
-                    border-radius: 50%;
-                    animation: spin 1s linear infinite;
-                    margin-bottom: 15px;
-                }
-                
-                .video-title {
-                    color: #fff;
-                    font-size: 18px;
-                    text-align: center;
-                    padding: 0 20px;
-                    line-height: 1.3;
-                }
-                
-                .glide__arrows {
-                    position: absolute;
-                    top: 50%;
-                    transform: translateY(-50%);
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 0 30px;
-                    z-index: 10;
-                }
-                
-                .glide__arrow {
-                    background: rgba(0,0,0,0.5);
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: #fff;
-                    cursor: pointer;
-                    transition: all 0.3s;
-                }
-                
-                .glide__arrow:hover {
-                    background: rgba(74, 144, 226, 0.9);
-                    transform: scale(1.1);
-                }
-                
-                .glide__bullets {
-                    position: absolute;
-                    bottom: 20px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    display: flex;
-                    gap: 10px;
-                    z-index: 10;
-                }
-                
                 .glide__bullet {
-                    width: 12px;
-                    height: 12px;
+                    width: 8px;
+                    height: 8px;
                     border-radius: 50%;
-                    background: rgba(255,255,255,0.5);
+                    background: #999;
+                    border: none;
+                    padding: 0;
                     cursor: pointer;
                     transition: all 0.3s;
                 }
                 
                 .glide__bullet--active {
-                    background: #4a90e2;
-                    width: 30px;
-                    border-radius: 6px;
+                    background: #2ecc71;
+                    width: 18px;
+                    border-radius: 4px;
+                }
+                
+                .glide__bullet:hover:not(.glide__bullet--active) {
+                    background: #777;
+                }
+                
+                .video-container {
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                }
+                
+                .video-item {
+                    box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+                    display: block;
+                    margin: 0 auto 15px;
+                    transition: all 0.3s;
+                }
+                
+                .video-item:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                }
+                
+                .caption {
+                    font-size: 14px;
+                    line-height: 1.5;
+                    color: #333;
+                    margin: 10px 0;
+                }
+                
+                .video-loading {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: rgba(0,0,0,0.7);
+                    z-index: 1;
+                }
+                
+                .spinner {
+                    width: 40px;
+                    height: 40px;
+                    border: 4px solid rgba(255,255,255,0.1);
+                    border-left-color: #2ecc71;
+                    border-radius: 50%;
+                    animation: spin 1s linear infinite;
+                }
+                
+                .video-fallback {
+                    display: none;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.8);
+                    color: #fff;
+                    z-index: 2;
+                }
+                
+                .video-fallback i {
+                    font-size: 3rem;
+                    margin-bottom: 10px;
+                    color: #2ecc71;
                 }
                 
                 @keyframes spin {
@@ -504,25 +638,24 @@
                 
                 /* 响应式设计 */
                 @media (max-width: 768px) {
-                    .video-container {
-                        padding-bottom: 75%; /* 4:3 比例适配移动端 */
+                    .video-item {
+                        width: 90% !important;
                     }
                     
-                    .glide__arrows {
-                        padding: 0 15px;
+                    .glide__bullet {
+                        width: 7px;
+                        height: 7px;
                     }
                     
-                    .glide__arrow {
-                        width: 40px;
-                        height: 40px;
+                    .glide__bullet--active {
+                        width: 16px;
                     }
                     
-                    .video-title {
-                        font-size: 16px;
+                    .caption {
+                        font-size: 13px;
                     }
                 }
             </style>
-
                 <br>
           <div class="section-title">BibTeX</div>
             <div class="container is-max-desktop content">
