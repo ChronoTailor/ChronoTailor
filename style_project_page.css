@@ -240,6 +240,34 @@ video {
     clear: both;
     display: table;
 }
+/* style_project_page.css 中添加以下代码 */
+
+/* 轮播导航圆点样式 */
+.glide__bullets {
+    text-align: center;
+    margin: 20px 0;
+}
+.glide__bullet {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.glide__bullet--active {
+    background: #3B82F6; /* 主色调蓝色 */
+    width: 16px;
+    height: 16px;
+}
+.glide__bullet:hover:not(.glide__bullet--active) {
+    background: #999;
+    transform: scale(1.1);
+}
 
 .section .bibtex {
     margin: 32px 0px 32px 0px;
