@@ -306,120 +306,115 @@
 
             <br>
             <div class="section-title">More Results</div>
-                <div class="glide">
-                    <!-- 动态生成的轮播指示器（10个视频对应10个按钮） -->
-                    <div class="glide__bullets" data-glide-el="controls[nav]" style="display: flex; justify-content: center; gap: 8px; margin: 15px 0;">
-                        <button class="glide__bullet glide__bullet--active" data-glide-dir="=0"></button>
-                        <button class="glide__bullet" data-glide-dir="=1"></button>
-                        <button class="glide__bullet" data-glide-dir="=2"></button>
-                        <button class="glide__bullet" data-glide-dir="=3"></button>
-                        <button class="glide__bullet" data-glide-dir="=4"></button>
-                        <button class="glide__bullet" data-glide-dir="=5"></button>
-                        <button class="glide__bullet" data-glide-dir="=6"></button>
-                        <button class="glide__bullet" data-glide-dir="=7"></button>
-                        <button class="glide__bullet" data-glide-dir="=8"></button>
-                        <button class="glide__bullet" data-glide-dir="=9"></button>
-                    </div>
-                    
-                    <div class="glide__track" data-glide-el="track">
-                        <ul class="glide__slides">
-                            <!-- 视频1 -->
-                            <li class="glide__slide">
-                                <div class="video-container">
-                                    <video data-src="src/6191.mp4" 
-                                           class="video-item"
-                                           style="width: 70%; border-radius: 8px;"
-                                        <div class="video-fallback">
-                                            <i class="fas fa-video"></i>
-                                            <p>视频加载失败，请检查格式或路径</p>
-                                        </div>
-                                    </video>
-                                    <div class="video-loading">
-                                        <div class="spinner"></div>
-                                    </div>
-                                </div>
-                                <p class="caption" align="center"><strong>Visual comparison of ours and other methods.</strong> Our method demonstrates superior capability in generating clearer texture details within the editing region, producing more plausible results that exhibit enhanced visual fidelity and structural coherence.</p>
-                            </li>
-                            
-                            <!-- 视频2-10 保持原有结构 -->
-                            <li class="glide__slide">
-                                <div class="video-container">
-                                    <video data-src="src/6192.mp4" 
-                                           class="video-item"
-                                           style="width: 60%; border-radius: 8px;"
-                                        <div class="video-fallback">
-                                            <i class="fas fa-video"></i>
-                                            <p>视频加载失败，请检查格式或路径</p>
-                                        </div>
-                                    </video>
-                                    <div class="video-loading">
-                                        <div class="spinner"></div>
-                                    </div>
-                                </div>
-                                <p class="caption" align="center"><strong>Qualitative comparison on the VITON-HD dataset.</strong> </p>
-                            </li>
-                            
-                            <!-- 省略视频3-10的代码，结构与视频2类似 -->
-                            
-                        </ul>
-                    </div>
+            <div class="glide2">
+                <!-- 动态生成的轮播指示器（10个视频对应10个按钮） -->
+                <div class="glide__bullets" data-glide-el="controls[nav]" style="display: flex; justify-content: center; gap: 8px; margin: 15px 0;">
+                    <button class="glide__bullet glide__bullet--active" data-glide-dir="=0"></button>
+                    <button class="glide__bullet" data-glide-dir="=1"></button>
+                    <button class="glide__bullet" data-glide-dir="=2"></button>
+                    <button class="glide__bullet" data-glide-dir="=3"></button>
+                    <button class="glide__bullet" data-glide-dir="=4"></button>
+                    <button class="glide__bullet" data-glide-dir="=5"></button>
+                    <button class="glide__bullet" data-glide-dir="=6"></button>
+                    <button class="glide__bullet" data-glide-dir="=7"></button>
+                    <button class="glide__bullet" data-glide-dir="=8"></button>
+                    <button class="glide__bullet" data-glide-dir="=9"></button>
                 </div>
                 
-                <!-- 引入依赖 -->
-                <link rel="stylesheet" href="https://unpkg.com/@glidejs/glide/dist/css/glide.core.min.css">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-                <script src="https://unpkg.com/@glidejs/glide"></script>
-                
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        // 初始化图片轮播
-                        const glide1 = new Glide('.glide1', {
-                            type: 'carousel',
-                            startAt: 0,
-                            perView: 1,
-                            autoplay: 5000,       // 5秒自动切换
-                            animationDuration: 500,// 切换动画时长
-                            gap: 20,              // 图片间距
-                            keyboard: true,       // 启用键盘导航
-                            touch: true           // 启用触摸滑动
+                <div class="glide__track" data-glide-el="track">
+                    <ul class="glide__slides">
+                        <!-- 视频1 -->
+                        <li class="glide__slide">
+                            <div class="video-container">
+                                <video data-src="src/6191.mp4" 
+                                       class="video-item"
+                                       style="width: 70%; border-radius: 8px;"
+                                    <div class="video-fallback">
+                                        <i class="fas fa-video"></i>
+                                        <p>视频加载失败，请检查格式或路径</p>
+                                    </div>
+                                </video>
+                                <div class="video-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                        </li>     
+                        <!-- 视频2-10 保持原有结构 -->
+                        <li class="glide__slide">
+                            <div class="video-container">
+                                <video data-src="src/6192.mp4" 
+                                       class="video-item"
+                                       style="width: 60%; border-radius: 8px;"
+                                    <div class="video-fallback">
+                                        <i class="fas fa-video"></i>
+                                        <p>视频加载失败，请检查格式或路径</p>
+                                    </div>
+                                </video>
+                                <div class="video-loading">
+                                    <div class="spinner"></div>
+                                </div>
+                            </div>
+                        </li>
+    
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 引入依赖 -->
+            <link rel="stylesheet" href="https://unpkg.com/@glidejs/glide/dist/css/glide.core.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            <script src="https://unpkg.com/@glidejs/glide"></script>
+            
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    // 初始化图片轮播
+                    const glide1 = new Glide('.glide1', {
+                        type: 'carousel',
+                        startAt: 0,
+                        perView: 1,
+                        autoplay: 5000,       // 5秒自动切换
+                        animationDuration: 500,// 切换动画时长
+                        gap: 20,              // 图片间距
+                        keyboard: true,       // 启用键盘导航
+                        touch: true           // 启用触摸滑动
+                    });
+                    
+                    // 初始化视频轮播
+                    const glide2 = new Glide('.glide2', {
+                        type: 'carousel',
+                        startAt: 0,
+                        perView: 1,
+                        autoplay: 5000,
+                        animationDuration: 500,
+                        gap: 20,
+                        keyboard: true,
+                        touch: true
+                    });
+                    
+                    glide1.mount();
+                    glide2.mount();
+                    
+                    // 视频加载逻辑
+                    const videos = document.querySelectorAll('.video-item');
+                    videos.forEach(video => {
+                        const src = video.getAttribute('data-src');
+                        video.src = src;
+                        
+                        const loading = video.parentElement.querySelector('.video-loading');
+                        const fallback = video.querySelector('.video-fallback');
+                        
+                        video.addEventListener('loadeddata', function() {
+                            loading.style.display = 'none';
                         });
                         
-                        // 初始化视频轮播
-                        const glide2 = new Glide('.glide', {
-                            type: 'carousel',
-                            startAt: 0,
-                            perView: 1,
-                            autoplay: 5000,
-                            animationDuration: 500,
-                            gap: 20,
-                            keyboard: true,
-                            touch: true
-                        });
-                        
-                        glide1.mount();
-                        glide2.mount();
-                        
-                        // 视频加载逻辑
-                        const videos = document.querySelectorAll('.video-item');
-                        videos.forEach(video => {
-                            const src = video.getAttribute('data-src');
-                            video.src = src;
-                            
-                            const loading = video.parentElement.querySelector('.video-loading');
-                            const fallback = video.querySelector('.video-fallback');
-                            
-                            video.addEventListener('loadeddata', function() {
-                                loading.style.display = 'none';
-                            });
-                            
-                            video.addEventListener('error', function() {
-                                loading.style.display = 'none';
-                                fallback.style.display = 'flex';
-                            });
+                        video.addEventListener('error', function() {
+                            loading.style.display = 'none';
+                            fallback.style.display = 'flex';
                         });
                     });
-                </script>
-                <br>
+                });
+            </script>
+            <br>
           <div class="section-title">BibTeX</div>
             <div class="container is-max-desktop content">
               <pre><code>@article{wang2025chronotailor,
