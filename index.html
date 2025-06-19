@@ -531,7 +531,50 @@
                     glide1.mount();
                     glide2.mount();
                     
-                    // 视频加载逻辑
+                    //轮播切换时暂停其他视频，播放当前视频
+                    glide2.on(['run.after'], function() {
+                        const currentSlide = this.index;
+                        const allVideos = document.querySelectorAll('.glide__slide video');
+                        
+                        // 暂停所有视频
+                        allVideos.forEach(video => {
+                            video.pause();
+                        });
+                        
+                        // 播放当前视频（带错误处理和用户交互提示）
+                        if (allVideos[currentSlide]) {
+                            const currentVideo = allVideos[currentSlide];
+                            const fallback = currentVideo.querySelector('.video-fallback');
+                            
+                            // 尝试播放视频
+                            currentVideo.play().catch(err => {
+                                console.log('自动播放失败，需要用户交互:', err);
+                                
+                                // 显示播放按钮和提示
+                                fallback.innerHTML = `
+                                    <div class="play-prompt">
+                                        <i class="fas fa-play-circle" style="font-size: 3rem; color: #3B82F6; cursor: pointer;"></i>
+                                        <p>点击播放视频</p>
+                                    </div>
+                                `;
+                                
+                                // 添加点击播放事件
+                                fallback.querySelector('.play-prompt').addEventListener('click', function() {
+                                    currentVideo.play().then(() => {
+                                        fallback.style.display = 'none';
+                                    }).catch(err => {
+                                        console.log('用户点击后仍无法播放:', err);
+                                        fallback.innerHTML = `
+                                            <i class="fas fa-exclamation-circle" style="font-size: 2rem; color: #ef4444;"></i>
+                                            <p>视频加载失败，请检查网络连接</p>
+                                        `;
+                                    });
+                                });
+                            });
+                        }
+                    });
+                    
+                   // 视频加载逻辑增强
                     const videos = document.querySelectorAll('.video-item');
                     videos.forEach(video => {
                         const src = video.getAttribute('data-src');
@@ -540,14 +583,61 @@
                         const loading = video.parentElement.querySelector('.video-loading');
                         const fallback = video.querySelector('.video-fallback');
                         
+                        // 视频加载成功
                         video.addEventListener('loadeddata', function() {
                             loading.style.display = 'none';
+                            
+                            // 显示视频控制栏（仅在用户交互后）
+                            video.classList.add('user-interacted');
                         });
                         
+                        // 视频加载错误
                         video.addEventListener('error', function() {
                             loading.style.display = 'none';
                             fallback.style.display = 'flex';
+                            
+                            // 错误状态显示
+                            fallback.innerHTML = `
+                                <i class="fas fa-exclamation-circle" style="font-size: 3rem; color: #ef4444;"></i>
+                                <p>视频加载失败，请检查路径或格式</p>
+                                <button class="reload-btn" style="margin-top: 10px; padding: 8px 16px; background: #3B82F6; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                                    重试加载
+                                </button>
+                            `;
+                            
+                            // 重试加载按钮
+                            fallback.querySelector('.reload-btn').addEventListener('click', function() {
+                                loading.style.display = 'flex';
+                                fallback.style.display = 'none';
+                                video.load(); // 重新加载视频
+                            });
                         });
+                        
+                        // 视频播放结束后循环播放
+                        video.addEventListener('ended', function() {
+                            if (this.muted) { // 仅循环静音视频
+                                this.play();
+                            }
+                        });
+                    });
+                    
+                    // 优化：视频进入视口时才加载（需要Intersection Observer API）
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const video = entry.target.querySelector('video');
+                                if (video && !video.src) {
+                                    const src = video.getAttribute('data-src');
+                                    video.src = src;
+                                    video.load();
+                                }
+                            }
+                        });
+                    }, { threshold: 0.1 }); // 当视频10%进入视口时加载
+                    
+                    // 观察所有轮播项
+                    document.querySelectorAll('.glide__slide').forEach(slide => {
+                        observer.observe(slide);
                     });
                 });
             </script>
