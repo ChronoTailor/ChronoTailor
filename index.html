@@ -13,12 +13,7 @@
         <link rel="stylesheet" href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
         <link rel="stylesheet" href="https://unpkg.com/@glidejs/glide/dist/css/glide.core.min.css">
         
-        <link rel="stylesheet" type="text/css" href="style_project_page.css?cache=7754391418498779889">
-
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-        <script src="https://unpkg.com/@glidejs/glide"></script>
-
+        <link rel="stylesheet" type="text/tailwindcss">
         <style type="text/tailwindcss">
             @layer utilities {
                 .content-auto {
@@ -227,7 +222,7 @@
                 }
             }
         </style>
-    </head>
+    </body>
     <body>
         <div class="section">
             <h1 class="project-title text-center font-bold text-3xl md:text-4xl text-gray-800 mb-6">
@@ -543,73 +538,82 @@
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 // 初始化图片轮播
-                const glide1 = new Glide('.glide1', {
-                    type: 'carousel',
-                    startAt: 0,
-                    perView: 1,
-                    autoplay: 5000,
-                    animationDuration: 500,
-                    gap: 20,
-                    keyboard: true,
-                    touch: true
-                });
-                glide1.mount();
+                const glide1Element = document.querySelector('.glide1');
+                if (glide1Element) {
+                    const glide1 = new Glide('.glide1', {
+                        type: 'carousel',
+                        startAt: 0,
+                        perView: 1,
+                        autoplay: 5000,
+                        animationDuration: 500,
+                        gap: 20,
+                        keyboard: true,
+                        touch: true
+                    });
+                    glide1.mount();
+                } else {
+                    console.error('未找到.glide1元素，图片轮播初始化失败');
+                }
                 
                 // 初始化视频轮播
-                const glide2 = new Glide('.glide2', {
-                    type: 'carousel',
-                    startAt: 0,
-                    perView: 1,
-                    autoplay: 5000,
-                    animationDuration: 500,
-                    gap: 20,
-                    keyboard: true,
-                    touch: true,
-                    // reorder: false
-                });
-                glide2.mount();
-                
-                // 轮播切换时暂停其他视频，播放当前视频
-                glide2.on(['run.after'], function() {
-                    const currentSlide = this.index;
-                    const allVideos = document.querySelectorAll('.glide__slide video');
-                    
-                    // 暂停所有视频
-                    allVideos.forEach(video => {
-                        video.pause();
+                const glide2Element = document.querySelector('.glide2');
+                if (glide2Element) {
+                    const glide2 = new Glide('.glide2', {
+                        type: 'carousel',
+                        startAt: 0,
+                        perView: 1,
+                        autoplay: 5000,
+                        animationDuration: 500,
+                        gap: 20,
+                        keyboard: true,
+                        touch: true
                     });
+                    glide2.mount();
                     
-                    // 播放当前视频
-                    if (allVideos[currentSlide]) {
-                        const currentVideo = allVideos[currentSlide];
-                        const fallback = currentVideo.querySelector('.video-fallback');
-                        const loading = currentVideo.parentElement.querySelector('.video-loading');
+                    // 轮播切换时暂停其他视频，播放当前视频
+                    glide2.on(['run.after'], function() {
+                        const currentSlide = this.index;
+                        const allVideos = document.querySelectorAll('.glide__slide video');
                         
-                        // 显示加载动画
-                        if (loading) loading.style.display = 'flex';
+                        // 暂停所有视频
+                        allVideos.forEach(video => {
+                            video.pause();
+                        });
                         
-                        // 尝试播放视频
-                        currentVideo.play()
-                            .then(() => {
-                                // 播放成功，隐藏加载动画和错误提示
-                                if (loading) loading.style.display = 'none';
-                                if (fallback) fallback.style.display = 'none';
-                            })
-                            .catch(err => {
-                                console.error('视频播放失败:', err);
-                                // 播放失败，隐藏加载动画，显示错误提示
-                                if (loading) loading.style.display = 'none';
-                                if (fallback) {
-                                    fallback.style.display = 'flex';
-                                    fallback.innerHTML = `
-                                        <i class="fas fa-exclamation-circle text-red-500"></i>
-                                        <p class="text-white">视频加载失败</p>
-                                        <p class="text-white text-sm mt-2">错误: ${err.message}</p>
-                                    `;
-                                }
-                            });
-                    }
-                });
+                        // 播放当前视频
+                        if (allVideos[currentSlide]) {
+                            const currentVideo = allVideos[currentSlide];
+                            const fallback = currentVideo.querySelector('.video-fallback');
+                            const loading = currentVideo.parentElement.querySelector('.video-loading');
+                            
+                            // 显示加载动画
+                            if (loading) loading.style.display = 'flex';
+                            
+                            // 尝试播放视频
+                            currentVideo.play()
+                                .then(() => {
+                                    // 播放成功，隐藏加载动画和错误提示
+                                    if (loading) loading.style.display = 'none';
+                                    if (fallback) fallback.style.display = 'none';
+                                })
+                                .catch(err => {
+                                    console.error('视频播放失败:', err);
+                                    // 播放失败，隐藏加载动画，显示错误提示
+                                    if (loading) loading.style.display = 'none';
+                                    if (fallback) {
+                                        fallback.style.display = 'flex';
+                                        fallback.innerHTML = `
+                                            <i class="fas fa-exclamation-circle text-red-500"></i>
+                                            <p class="text-white">视频加载失败</p>
+                                            <p class="text-white text-sm mt-2">错误: ${err.message}</p>
+                                        `;
+                                    }
+                                });
+                        }
+                    });
+                } else {
+                    console.error('未找到.glide2元素，视频轮播初始化失败');
+                }
                 
                 // 视频加载逻辑
                 const videos = document.querySelectorAll('.video-item');
@@ -665,8 +669,8 @@
                                 const video = entry.target.querySelector('video');
                                 if (video) {
                                     video.load();
-                                    // 开始轮播
-                                    if (glide2 && !glide2.isGliding) {
+                                    // 如果轮播已初始化，则开始轮播
+                                    if (glide2Element && glide2 && !glide2.isGliding) {
                                         glide2.play();
                                     }
                                 }
