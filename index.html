@@ -748,7 +748,7 @@
                 function load_part(part_idx) {
                     progresses[part_idx] = 0;
                     loader.load(
-                        prefix + "/part_00" + part_idx + ".obj",
+                        prefix + ".obj",
                         function (object) {
                             var g = object.children[0].geometry;
                             var m = new THREE.MeshLambertMaterial({color: colors[part_idx]});
