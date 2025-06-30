@@ -3,7 +3,7 @@
     <head>
         <title>ChronoTailor: Harnessing Attention Guidance for Fine-Grained Video Virtual Try-On</title>
 
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="UTF-8">
         <meta name="author" content="Jinjuan Wang, Wenzhang Sun, Ming Li, et al.">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -19,77 +19,61 @@
         <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
         <script src="https://unpkg.com/@glidejs/glide"></script>
 
-        <style type="text/css">
+        <style type="text/tailwindcss">
+            @layer utilities {
+                .content-auto {
+                    content-visibility: auto;
+                }
+                .video-shadow {
+                    box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+                }
+                .hover-lift {
+                    transition: transform 0.3s ease, box-shadow 0.3s ease;
+                }
+                .hover-lift:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+                }
+            }
+        </style>
+
+        <style type="text/tailwindcss">
+            @layer utilities {
+                .text-shadow {
+                    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }
+                .animate-spin-slow {
+                    animation: spin 2s linear infinite;
+                }
+                .progress-bar {
+                    height: 5px;
+                    background: linear-gradient(to right, #3B82F6, #60A5FA);
+                    transition: width 0.3s ease;
+                }
+            }
+        </style>
+
+        <style>
+            /* 基础布局 */
             .side-text {
-                width:60%;
-                display:inline-block;
-                vertical-align:top;
+                width: 60%;
+                display: inline-block;
+                vertical-align: top;
             }
             .side-image {
                 width: 38%;
                 display: inline-block;
                 vertical-align: top;
             }
-            .controls {
-                margin-bottom: 10px;
-            }
-            .left-controls {
-                display: inline-block;
-                vertical-align: top;
-                width: 80%;
-            }
-            .right-controls {
-                display: inline-block;
-                vertical-align: top;
-                width: 19%;
-                text-align: right;
-            }
             .render_window {
                 display: inline-block;
                 vertical-align: middle;
-                box-shadow: 1px 0px 5px black;
                 margin-right: 10px;
                 margin-bottom: 10px;
                 width: calc(33% - 10px);
             }
-            .progress {
-                background: #666;
-                position: relative;
-                height: 5px;
-                margin-bottom: -5px;
-                display: none;
-            }
-            .glide__slide:hover {cursor: grab;}
-            .glide__slide:active {cursor: grabbing;}
-            .glide__slide img {width: 90%;}
-            
-            /* 轮播导航圆点样式 */
-            .glide__bullets {
-                text-align: center;
-                margin: 20px 0;
-            }
-            .glide__bullet {
-                width: 12px;
-                height: 12px;
-                border-radius: 50%;
-                background: #ddd;
-                border: none;
-                padding: 0;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                margin: 0 5px;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            }
-            .glide__bullet--active {
-                background: #3B82F6; /* 主色调蓝色 */
-                width: 16px;
-                height: 16px;
-            }
-            .glide__bullet:hover:not(.glide__bullet--active) {
-                background: #999;
-                transform: scale(1.1);
-            }
 
+            /* 响应式布局 */
             @media (max-width: 400px) {
                 .render_window {
                     display: block;
@@ -109,28 +93,31 @@
                 }
             }
             
+            /* 自定义组件样式 */
             .section-title {
                 text-align: center;
                 font-size: 24px;
                 margin: 30px 0 20px;
                 position: relative;
             }
-            .section-title:after {
+            .section-title::after {
                 content: '';
                 display: block;
                 width: 60px;
                 height: 3px;
-                background: #4a90e2;
+                background: #3B82F6;
                 margin: 10px auto 0;
             }
             
+            /* 视频容器 */
             .video-container {
                 position: relative;
                 display: flex;
                 justify-content: center;
             }
             .video-item {
-                box-shadow: 0 4px 18px rgba(0,0,0,0.15);
+                border-radius: 8px;
+                video-shadow: 0 4px 18px rgba(0,0,0,0.15);
                 display: block;
                 margin: 0 auto 15px;
                 transition: all 0.3s;
@@ -145,6 +132,8 @@
                 color: #333;
                 margin: 10px 0;
             }
+            
+            /* 视频加载状态 */
             .video-loading {
                 position: absolute;
                 top: 0;
@@ -156,12 +145,13 @@
                 align-items: center;
                 background: rgba(0,0,0,0.7);
                 z-index: 1;
+                border-radius: 8px;
             }
             .spinner {
                 width: 40px;
                 height: 40px;
                 border: 4px solid rgba(255,255,255,0.1);
-                border-left-color: #2ecc71;
+                border-left-color: #3B82F6;
                 border-radius: 50%;
                 animation: spin 1s linear infinite;
             }
@@ -175,15 +165,51 @@
                 background: rgba(0,0,0,0.8);
                 color: #fff;
                 z-index: 2;
+                border-radius: 8px;
+                text-align: center;
             }
             .video-fallback i {
                 font-size: 3rem;
                 margin-bottom: 10px;
-                color: #2ecc71;
+                color: #3B82F6;
             }
             @keyframes spin {
                 to { transform: rotate(360deg); }
             }
+            
+            /* 轮播组件 */
+            .glide__slide:hover { cursor: grab; }
+            .glide__slide:active { cursor: grabbing; }
+            .glide__slide img { width: 90%; }
+            
+            /* 轮播导航圆点样式 */
+            .glide__bullets {
+                text-align: center;
+                margin: 20px 0;
+            }
+            .glide__bullet {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: #ddd;
+                border: none;
+                padding: 0;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                margin: 0 5px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            .glide__bullet--active {
+                background: #3B82F6;
+                width: 16px;
+                height: 16px;
+            }
+            .glide__bullet:hover:not(.glide__bullet--active) {
+                background: #999;
+                transform: scale(1.1);
+            }
+            
+            /* 响应式调整 */
             @media (max-width: 768px) {
                 .video-item {
                     width: 90% !important;
@@ -204,449 +230,461 @@
     </head>
     <body>
         <div class="section">
-            <h1 class="project-title">
+            <h1 class="project-title text-center font-bold text-3xl md:text-4xl text-gray-800 mb-6">
                 ChronoTailor: Harnessing Attention Guidance for Fine-Grained Video Virtual Try-On
             </h1>
             
-            <div class="authors">
-                <a href="">Jinjuan Wang <sup>1*</sup></a>
-                <a href="">Wenzhang Sun <sup>2*</sup></a>
-                <a href="">Ming Li <sup>1</sup></a>
-                <a href="">Yun Zheng <sup>1</sup></a>
-                <a href="">Fanyao Li <sup>1</sup></a>
-                <a href="">Zhulin Tao <sup>1†</sup></a>
-                <a href="">Donglin Di <sup>2</sup></a>
-                <a href="">Hao Li <sup>2</sup></a>
-                <a href="">Wei Chen <sup>2</sup></a>
-                <a href="">Xianglin Huang <sup>1</sup></a>
+            <div class="authors text-center mb-4">
+                <a href="" class="inline-block mx-2 text-blue-600 hover:text-blue-800 transition-colors">Jinjuan Wang <sup>1*</sup></a>
+                <a href="" class="inline-block mx-2 text-blue-600 hover:text-blue-800 transition-colors">Wenzhang Sun <sup>2*</sup></a>
+                <a href="" class="inline-block mx-2 text-blue-600 hover:text-blue-800 transition-colors">Ming Li <sup>1</sup></a>
+                <a href="" class="inline-block mx-2 text-blue-600 hover:text-blue-800 transition-colors">Yun Zheng <sup>1</sup></a>
+                <a href="" class="inline-block mx-2 text-blue-600 hover:text-blue-800 transition-colors">Fanyao Li <sup>1</sup></a>
+                <a href="" class="inline-block mx-2 text-blue-600 hover:text-blue-800 transition-colors">Zhulin Tao <sup>1†</sup></a>
+                <a href="" class="inline-block mx-2 text-blue-600 hover:text-blue-800 transition-colors">Donglin Di <sup>2</sup></a>
+                <a href="" class="inline-block mx-2 text-blue-600 hover:text-blue-800 transition-colors">Hao Li <sup>2</sup></a>
+                <a href="" class="inline-block mx-2 text-blue-600 hover:text-blue-800 transition-colors">Wei Chen <sup>2</sup></a>
+                <a href="" class="inline-block mx-2 text-blue-600 hover:text-blue-800 transition-colors">Xianglin Huang <sup>1</sup></a>
             </div>
 
-            <div class="affiliations">
-                <span><sup>1</sup> <a href="https://www.cuc.edu.cn">Communication University of China</a></span>
-                <span><sup>2</sup> <a href="">Li Auto</a></span>
+            <div class="affiliations text-center mb-8">
+                <span class="inline-block mx-3 text-gray-600"><sup>1</sup> <a href="https://www.cuc.edu.cn" class="text-blue-600 hover:underline">Communication University of China</a></span>
+                <span class="inline-block mx-3 text-gray-600"><sup>2</sup> <a href="" class="text-blue-600 hover:underline">Li Auto</a></span>
             </div>
 
-            <div class="project-icons">
-                <a href="https://arxiv.org/abs/2506.05858" id="paper-link">
-                    <i class="fa fa-file"></i> <br/>Paper
+            <div class="project-icons flex justify-center gap-8 mb-8">
+                <a href="https://arxiv.org/abs/2506.05858" id="paper-link" class="flex flex-col items-center group">
+                    <i class="fa fa-file text-3xl text-blue-600 group-hover:text-blue-800 transition-colors"></i> 
+                    <span class="mt-2 font-medium">Paper</span>
                 </a>
-                <a href="https://github.com/ChronoTailor/ChronoTailor/" id="code-link">
-                    <i class="fa fa-github"></i> <br/>Code
+                <a href="https://github.com/ChronoTailor/ChronoTailor/" id="code-link" class="flex flex-col items-center group">
+                    <i class="fa fa-github text-3xl text-blue-600 group-hover:text-blue-800 transition-colors"></i> 
+                    <span class="mt-2 font-medium">Code</span>
                 </a>
             </div>
 
-            <div class="teaser-image">
-                <img src="src/Fig1_00.png" style="width:90%;"> <!-- 修正路径分隔符为/ -->
-                <p class="caption" align="center"><strong>ChronoTailor</strong> excels at generating high-quality virtual try-ons for diverse garments, effectively maintaining visual coherence and preserving background details.</p>
+            <div class="teaser-image text-center mb-10">
+                <img src="src/Fig1_00.png" style="width:90%;" class="rounded-lg shadow-lg mx-auto">
+                <p class="caption mt-4 text-gray-600"><strong>ChronoTailor</strong> excels at generating high-quality virtual try-ons for diverse garments, effectively maintaining visual coherence and preserving background details.</p>
             </div>
 
             <div class="section-title">Abstract</div>
-            <div class="content">
-                <p>Video virtual try-on aims to seamlessly replace the clothing of a person in a source video with a target garment. Despite significant progress in this field, existing approaches still struggle to maintain continuity and reproduce garment details.</p>
-                <p>In this paper, we introduce ChronoTailor, a diffusion-based framework that generates temporally consistent videos while preserving fine-grained garment details. By employing a precise spatio-temporal attention mechanism to guide the integration of fine-grained garment features, ChronoTailor achieves robust try-on performance.</p>
-                <p>First, ChronoTailor leverages region-aware spatial guidance to steer the evolution of spatial attention and employs an attention-driven temporal feature fusion mechanism to generate more continuous temporal features. This dual approach not only enables fine-grained local editing but also effectively mitigates artifacts arising from video dynamics.</p>
-                <p>Second, ChronoTailor integrates multi-scale garment features to preserve low-level visual details and incorporates a garment-pose feature alignment to ensure temporal continuity during dynamic motion. Additionally, we collect StyleDress, a new dataset featuring intricate garments, varied environments, and diverse poses, offering advantages over existing public datasets, and will be publicly available for research. Extensive experiments show that ChronoTailor maintains spatio-temporal continuity and preserves garment details during motion, significantly outperforming previous methods.</p>
+            <div class="content max-w-4xl mx-auto px-4 mb-12">
+                <p class="mb-4 text-gray-700">Video virtual try-on aims to seamlessly replace the clothing of a person in a source video with a target garment. Despite significant progress in this field, existing approaches still struggle to maintain continuity and reproduce garment details.</p>
+                <p class="mb-4 text-gray-700">In this paper, we introduce ChronoTailor, a diffusion-based framework that generates temporally consistent videos while preserving fine-grained garment details. By employing a precise spatio-temporal attention mechanism to guide the integration of fine-grained garment features, ChronoTailor achieves robust try-on performance.</p>
+                <p class="mb-4 text-gray-700">First, ChronoTailor leverages region-aware spatial guidance to steer the evolution of spatial attention and employs an attention-driven temporal feature fusion mechanism to generate more continuous temporal features. This dual approach not only enables fine-grained local editing but also effectively mitigates artifacts arising from video dynamics.</p>
+                <p class="text-gray-700">Second, ChronoTailor integrates multi-scale garment features to preserve low-level visual details and incorporates a garment-pose feature alignment to ensure temporal continuity during dynamic motion. Additionally, we collect StyleDress, a new dataset featuring intricate garments, varied environments, and diverse poses, offering advantages over existing public datasets, and will be publicly available for research. Extensive experiments show that ChronoTailor maintains spatio-temporal continuity and preserves garment details during motion, significantly outperforming previous methods.</p>
             </div>
 
 
             <div class="section-title">Overview of ChronoTailor</div>
-            <div class="content">
-                <p>ChronoTailor aims to generate temporally coherent virtual try-on videos while preserving fine-grained garment details.</p>
-                <p>ChronoTailor  consists of two main components: (1) Spatial-Temporal Attention Guidance, which includes Region-Aware Spatial Guidance (RASG) that uses segmentation masks to guide spatial attention map evolution, and Attention-Driven Temporal Feature Fusion (ATFF), which employs an asymmetric cross-space attention mechanism using original features as queries and randomly fused other frame features as key-values to integrate temporal information effectively. </p>
-                <p>(2) Multi-scale Garment-Pose Feature Alignment, which first applies Adaptive Multi-scale Feature Extraction (AMFE) to enhance low-level garment details, and then aligns garment features with pose features using Garment-Pose Feature Alignment (GPFA).</p>
-                <img src="src/Fig2Model_00.png" style="width:90%;"> <!-- 修正路径分隔符为/ -->
-                <p class="caption" align="center"><strong>Architecture of the ChronoTailor.</strong> Spatial-Temporal Attention Guidance enables the acquisition of stable guidance for garment feature injection. Multi-scale Garment-Pose Feature Alignment, meanwhile, facilitates the capture of more precise garment information during motion.</p> <br>
+            <div class="content max-w-4xl mx-auto px-4 mb-12">
+                <p class="mb-4 text-gray-700">ChronoTailor aims to generate temporally coherent virtual try-on videos while preserving fine-grained garment details.</p>
+                <p class="mb-4 text-gray-700">ChronoTailor  consists of two main components: (1) Spatial-Temporal Attention Guidance, which includes Region-Aware Spatial Guidance (RASG) that uses segmentation masks to guide spatial attention map evolution, and Attention-Driven Temporal Feature Fusion (ATFF), which employs an asymmetric cross-space attention mechanism using original features as queries and randomly fused other frame features as key-values to integrate temporal information effectively. </p>
+                <p class="mb-6 text-gray-700">(2) Multi-scale Garment-Pose Feature Alignment, which first applies Adaptive Multi-scale Feature Extraction (AMFE) to enhance low-level garment details, and then aligns garment features with pose features using Garment-Pose Feature Alignment (GPFA).</p>
+                
+                <div class="text-center mb-8">
+                    <img src="src/Fig2Model_00.png" style="width:90%;" class="rounded-lg shadow-md mx-auto">
+                    <p class="caption mt-4 text-gray-600"><strong>Architecture of the ChronoTailor.</strong> Spatial-Temporal Attention Guidance enables the acquisition of stable guidance for garment feature injection. Multi-scale Garment-Pose Feature Alignment, meanwhile, facilitates the capture of more precise garment information during motion.</p>
+                </div>
 
-                <img src="src/supp_styledress_00.png" style="width:60%;"> <!-- 修正路径分隔符为/ -->
-                <p class="caption" align="center"><strong>Sample pairs from the StyleDress.</strong></p>
+                <div class="text-center mb-12">
+                    <img src="src/supp_styledress_00.png" style="width:60%;" class="rounded-lg shadow-md mx-auto">
+                    <p class="caption mt-4 text-gray-600"><strong>Sample pairs from the StyleDress.</strong></p>
+                </div>
+            </div>
 
             <div class="section-title">Visualization of Methods</div>
-            <div class="glide1">
-               <!-- 改为10个圆点导航按钮 -->
-                <div class="glide__bullets" data-glide-el="controls[nav]">
-                    <button class="glide__bullet glide__bullet--active" data-glide-dir="=0"></button>
-                    <button class="glide__bullet" data-glide-dir="=1"></button>
-                    <button class="glide__bullet" data-glide-dir="=2"></button>
-                    <button class="glide__bullet" data-glide-dir="=3"></button>
-                    <button class="glide__bullet" data-glide-dir="=4"></button>
-                    <button class="glide__bullet" data-glide-dir="=5"></button>
-                    <button class="glide__bullet" data-glide-dir="=6"></button>
-                </div>
-                <div class="glide__track" data-glide-el="track">
-                    <ul class="glide__slides">
-                        <li class="glide__slide"><img src="src/VIVID_00.png" style="width:70%;"> <!-- 修正路径分隔符为/ -->
-                            <p class="caption" align="center"><strong>Visual comparison of ours and other methods.</strong> Our method demonstrates superior capability in generating clearer texture details within the editing region, producing more plausible results that exhibit enhanced visual fidelity and structural coherence.</p>
-                        </li>
-                        
-                        <li class="glide__slide"><img src="src/viton_00.png" style="width:60%;"> <!-- 修正路径分隔符为/ -->
-                            <p class="caption" align="center"><strong>Qualitative comparison on the VITON-HD dataset.</strong> </p>
-                        </li>
-                        <li class="glide__slide"><img src="src/Fig6_accessories_00.png" style="width:60%;"> <!-- 修正路径分隔符为/ -->
-                            <p class="caption" align="center"><strong>ChronoTailor effectively preserves information in non - edited regions.</strong> </p>
-                        </li>
-
-                        <li class="glide__slide"><img src="src/Fig8_inthewild_00.png" style="width:60%;"> <!-- 修正路径分隔符为/ -->
-                            <p class="caption" align="center"><strong>Qualitative results of our method on the StyleDress dataset.</strong> </p>
-                        </li>
-
-                        <li class="glide__slide"><img src="src/AMFE_00.png" style="width:60%;"> <!-- 修正路径分隔符为/ -->
-                            <p class="caption" align="center"><strong>Ablation study of Adaptive Multi-scale Feature Extraction. The upper garment try-on fully recovers two floral patterns, demonstrating ChronoTailor’s capability to preserve intricate textures and semantic details.</strong> </p>
-                        </li>
-
-                         <li class="glide__slide"><img src="src/ATFF_00.png" style="width:60%;"> <!-- 修正路径分隔符为/ -->
-                            <p class="caption" align="center"><strong>Ablation study of Attention-Driven Temporal Feature Fusion.</strong> </p>
-                        </li>
-
-                         <li class="glide__slide"><img src="src/RASG_00.png" style="width:60%;"> <!-- 修正路径分隔符为/ -->
-                            <p class="caption" align="center"><strong>Ablation study of Region-Aware Spatial Guidance.</strong>Our method balances attention between editing and non - editing regions. </p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <br>
-            <div class="section-title">More Results</div>
-            <div class="glide2">
-                <!-- 动态生成的轮播指示器（10个视频对应10个按钮） -->
-                <div class="glide__bullets" data-glide-el="controls[nav]" >
-                    <button class="glide__bullet glide__bullet--active" data-glide-dir="=0"></button>
-                    <button class="glide__bullet" data-glide-dir="=1"></button>
-                    <button class="glide__bullet" data-glide-dir="=2"></button>
-                    <button class="glide__bullet" data-glide-dir="=3"></button>
-                    <button class="glide__bullet" data-glide-dir="=4"></button>
-                    <button class="glide__bullet" data-glide-dir="=5"></button>
-                    <button class="glide__bullet" data-glide-dir="=6"></button>
-                    <button class="glide__bullet" data-glide-dir="=7"></button>
-                    <button class="glide__bullet" data-glide-dir="=8"></button>
-                    <button class="glide__bullet" data-glide-dir="=9"></button>
-                </div>
-                
-                <div class="glide__track" data-glide-el="track">
-                    <ul class="glide__slides">
-                        <!-- 视频1 -->
-                        <li class="glide__slide">
-                            <div class="video-container">
-                                <video class="video-item" style="width: 100%; border-radius: 8px;" muted>
-                                    <source src="src/6191.mp4" type="video/mp4"> <!-- 保持路径为/ -->
-                                    <div class="video-fallback">
-                                        <i class="fas fa-play-circle" style="font-size: 3rem; cursor: pointer;"></i>
-                                        <p>点击播放视频</p>
-                                    </div>
-                                </video>
-                                <div class="video-loading">
-                                    <div class="spinner"></div>
-                                </div>
-                            </div>
-                        </li>     
-                        <!-- 视频2 -->
-                        <li class="glide__slide">
-                            <div class="video-container">
-                                <video class="video-item" style="width: 100%; border-radius: 8px;" muted>
-                                    <source src="src/6192.mp4" type="video/mp4"> <!-- 保持路径为/ -->
-                                    <div class="video-fallback">
-                                        <i class="fas fa-play-circle" style="font-size: 3rem; cursor: pointer;"></i>
-                                        <p>点击播放视频</p>
-                                    </div>
-                                </video>
-                                <div class="video-loading">
-                                    <div class="spinner"></div>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- 视频3 -->
-                        <li class="glide__slide">
-                            <div class="video-container">
-                                <video class="video-item" style="width: 100%; border-radius: 8px;" muted>
-                                    <source src="src/6193.mp4" type="video/mp4"> <!-- 保持路径为/ -->
-                                    <div class="video-fallback">
-                                        <i class="fas fa-play-circle" style="font-size: 3rem; cursor: pointer;"></i>
-                                        <p>点击播放视频</p>
-                                    </div>
-                                </video>
-                                <div class="video-loading">
-                                    <div class="spinner"></div>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- 视频4 -->
-                        <li class="glide__slide">
-                                        <div class="video-container">
-                                            <video class="video-item" style="width: 100%; border-radius: 8px;" muted>
-                                                <source src="src/6194.mp4" type="video/mp4"> <!-- 保持路径为/ -->
-                                                <div class="video-fallback">
-                                                    <i class="fas fa-play-circle" style="font-size: 3rem; cursor: pointer;"></i>
-                                                    <p>点击播放视频</p>
-                                                </div>
-                                            </video>
-                                            <div class="video-loading">
-                                                <div class="spinner"></div>
-                                            </div>
-                                        </div>
-                                    </li>
-                        <!-- 视频5 -->
-                        <li class="glide__slide">
-                                            <div class="video-container">
-                                                <video class="video-item" style="width: 100%; border-radius: 8px;" muted>
-                                                    <source src="src/6195.mp4" type="video/mp4"> <!-- 保持路径为/ -->
-                                                    <div class="video-fallback">
-                                                        <i class="fas fa-play-circle" style="font-size: 3rem; cursor: pointer;"></i>
-                                                        <p>点击播放视频</p>
-                                                    </div>
-                                                </video>
-                                                <div class="video-loading">
-                                                    <div class="spinner"></div>
-                                                </div>
-                                            </div>
-                                        </li>
-                        <!-- 视频6 -->
-                        <li class="glide__slide">
-                                            <div class="video-container">
-                                               <video class="video-item" style="width: 100%; border-radius: 8px;" muted>
-                                                    <source src="src/6196.mp4" type="video/mp4"> <!-- 保持路径为/ -->
-                                                    <div class="video-fallback">
-                                                        <i class="fas fa-play-circle" style="font-size: 3rem; cursor: pointer;"></i>
-                                                        <p>点击播放视频</p>
-                                                    </div>
-                                                </video>
-                                                <div class="video-loading">
-                                                    <div class="spinner"></div>
-                                                </div>
-                                            </div>
-                                        </li>
-                        <!-- 视频7 -->
-                        <li class="glide__slide">
-                            <div class="video-container">
-                                <video class="video-item" style="width: 100%; border-radius: 8px;" muted>
-                                    <source src="src/6197.mp4" type="video/mp4"> <!-- 保持路径为/ -->
-                                    <div class="video-fallback">
-                                        <i class="fas fa-play-circle" style="font-size: 3rem; cursor: pointer;"></i>
-                                        <p>点击播放视频</p>
-                                    </div>
-                                </video>
-                                <div class="video-loading">
-                                    <div class="spinner"></div>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- 视频8 -->
-                        <li class="glide__slide">
-                            <div class="video-container">
-                                <video class="video-item" style="width: 100%; border-radius: 8px;" muted>
-                                    <source src="src/6198.mp4" type="video/mp4"> <!-- 保持路径为/ -->
-                                    <div class="video-fallback">
-                                        <i class="fas fa-play-circle" style="font-size: 3rem; cursor: pointer;"></i>
-                                        <p>点击播放视频</p>
-                                    </div>
-                                </video>
-                                <div class="video-loading">
-                                    <div class="spinner"></div>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- 视频9 -->
-                        <li class="glide__slide">
-                            <div class="video-container">
-                                <video class="video-item" style="width: 100%; border-radius: 8px;" muted>
-                                    <source src="src/6199.mp4" type="video/mp4"> <!-- 保持路径为/ -->
-                                    <div class="video-fallback">
-                                        <i class="fas fa-play-circle" style="font-size: 3rem; cursor: pointer;"></i>
-                                        <p>点击播放视频</p>
-                                    </div>
-                                </video>
-                                <div class="video-loading">
-                                    <div class="spinner"></div>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- 视频10 -->
-                        <li class="glide__slide">
-                            <div class="video-container">
-                                <video class="video-item" style="width: 100%; border-radius: 8px;" muted>
-                                    <source src="src/61910.mp4" type="video/mp4"> <!-- 保持路径为/ -->
-                                    <div class="video-fallback">
-                                        <i class="fas fa-play-circle" style="font-size: 3rem; cursor: pointer;"></i>
-                                        <p>点击播放视频</p>
-                                    </div>
-                                </video>
-                                <div class="video-loading">
-                                    <div class="spinner"></div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- 引入依赖 -->
-            <link rel="stylesheet" href="https://unpkg.com/@glidejs/glide/dist/css/glide.core.min.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-            <script src="https://unpkg.com/@glidejs/glide"></script>
-            
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    // 初始化图片轮播
-                    const glide1 = new Glide('.glide1', {
-                        type: 'carousel',
-                        startAt: 0,
-                        perView: 1,
-                        autoplay: 5000,       // 5秒自动切换
-                        animationDuration: 500,// 切换动画时长
-                        gap: 20,              // 图片间距
-                        keyboard: true,       // 启用键盘导航
-                        touch: true           // 启用触摸滑动
-                    });
-                    glide1.mount();
-                    
-                    // 初始化视频轮播
-                    const glide2 = new Glide('.glide2', {
-                        type: 'carousel',
-                        startAt: 0,
-                        perView: 1,
-                        autoplay: 5000,
-                        animationDuration: 500,
-                        gap: 20,
-                        keyboard: true,
-                        touch: true,
-                        reorder: false // 禁用重排序
-                    });
-                    glide2.mount();
-                    
-                    //轮播切换时暂停其他视频，播放当前视频
-                    glide2.on(['run.after'], function() {
-                        const currentSlide = this.index;
-                        const allVideos = document.querySelectorAll('.glide__slide video');
-                        
-                        // 暂停所有视频
-                        allVideos.forEach(video => {
-                            video.pause();
-                        });
-                        
-                        // 播放当前视频（带错误处理和用户交互提示）
-                        if (allVideos[currentSlide]) {
-                            const currentVideo = allVideos[currentSlide];
-                            const fallback = currentVideo.querySelector('.video-fallback');
+            <div class="max-w-5xl mx-auto px-4 mb-16">
+                <div class="glide1">
+                    <div class="glide__bullets" data-glide-el="controls[nav]">
+                        <button class="glide__bullet glide__bullet--active" data-glide-dir="=0"></button>
+                        <button class="glide__bullet" data-glide-dir="=1"></button>
+                        <button class="glide__bullet" data-glide-dir="=2"></button>
+                        <button class="glide__bullet" data-glide-dir="=3"></button>
+                        <button class="glide__bullet" data-glide-dir="=4"></button>
+                        <button class="glide__bullet" data-glide-dir="=5"></button>
+                        <button class="glide__bullet" data-glide-dir="=6"></button>
+                    </div>
+                    <div class="glide__track" data-glide-el="track">
+                        <ul class="glide__slides">
+                            <li class="glide__slide text-center">
+                                <img src="src/VIVID_00.png" style="width:70%;" class="rounded-lg shadow-md mx-auto">
+                                <p class="caption mt-4 text-gray-600"><strong>Visual comparison of ours and other methods.</strong> Our method demonstrates superior capability in generating clearer texture details within the editing region, producing more plausible results that exhibit enhanced visual fidelity and structural coherence.</p>
+                            </li>
                             
-                            // 尝试播放视频
-                            currentVideo.play().catch(err => {
-                                console.error('自动播放失败，需要用户交互:', err);
-                                
-                                // 显示播放按钮和提示
-                                fallback.innerHTML = `
-                                    <div class="play-prompt">
-                                        <i class="fas fa-play-circle" style="font-size: 3rem; color: #3B82F6; cursor: pointer;"></i>
-                                        <p>点击播放视频</p>
+                            <li class="glide__slide text-center">
+                                <img src="src/viton_00.png" style="width:60%;" class="rounded-lg shadow-md mx-auto">
+                                <p class="caption mt-4 text-gray-600"><strong>Qualitative comparison on the VITON-HD dataset.</strong> </p>
+                            </li>
+                            
+                            <li class="glide__slide text-center">
+                                <img src="src/Fig6_accessories_00.png" style="width:60%;" class="rounded-lg shadow-md mx-auto">
+                                <p class="caption mt-4 text-gray-600"><strong>ChronoTailor effectively preserves information in non - edited regions.</strong> </p>
+                            </li>
+
+                            <li class="glide__slide text-center">
+                                <img src="src/Fig8_inthewild_00.png" style="width:60%;" class="rounded-lg shadow-md mx-auto">
+                                <p class="caption mt-4 text-gray-600"><strong>Qualitative results of our method on the StyleDress dataset.</strong> </p>
+                            </li>
+
+                            <li class="glide__slide text-center">
+                                <img src="src/AMFE_00.png" style="width:60%;" class="rounded-lg shadow-md mx-auto">
+                                <p class="caption mt-4 text-gray-600"><strong>Ablation study of Adaptive Multi-scale Feature Extraction. The upper garment try-on fully recovers two floral patterns, demonstrating ChronoTailor’s capability to preserve intricate textures and semantic details.</strong> </p>
+                            </li>
+
+                            <li class="glide__slide text-center">
+                                <img src="src/ATFF_00.png" style="width:60%;" class="rounded-lg shadow-md mx-auto">
+                                <p class="caption mt-4 text-gray-600"><strong>Ablation study of Attention-Driven Temporal Feature Fusion.</strong> </p>
+                            </li>
+
+                            <li class="glide__slide text-center">
+                                <img src="src/RASG_00.png" style="width:60%;" class="rounded-lg shadow-md mx-auto">
+                                <p class="caption mt-4 text-gray-600"><strong>Ablation study of Region-Aware Spatial Guidance.</strong> Our method balances attention between editing and non - editing regions. </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">More Results</div>
+            <div class="max-w-5xl mx-auto px-4 mb-16">
+                <div class="glide2">
+                    <div class="glide__bullets" data-glide-el="controls[nav]">
+                        <button class="glide__bullet glide__bullet--active" data-glide-dir="=0"></button>
+                        <button class="glide__bullet" data-glide-dir="=1"></button>
+                        <button class="glide__bullet" data-glide-dir="=2"></button>
+                        <button class="glide__bullet" data-glide-dir="=3"></button>
+                        <button class="glide__bullet" data-glide-dir="=4"></button>
+                        <button class="glide__bullet" data-glide-dir="=5"></button>
+                        <button class="glide__bullet" data-glide-dir="=6"></button>
+                        <button class="glide__bullet" data-glide-dir="=7"></button>
+                        <button class="glide__bullet" data-glide-dir="=8"></button>
+                        <button class="glide__bullet" data-glide-dir="=9"></button>
+                    </div>
+                    
+                    <div class="glide__track" data-glide-el="track">
+                        <ul class="glide__slides">
+                            <!-- 视频1 -->
+                            <li class="glide__slide">
+                                <div class="video-container">
+                                    <video class="video-item hover-lift" style="width: 100%;" muted playsinline>
+                                        <source src="src/6191.mp4" type="video/mp4">
+                                        <div class="video-fallback">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                            <p>您的浏览器不支持HTML5视频播放</p>
+                                        </div>
+                                    </video>
+                                    <div class="video-loading">
+                                        <div class="spinner"></div>
                                     </div>
-                                `;
-                                
-                                // 添加点击播放事件
-                                fallback.querySelector('.play-prompt').addEventListener('click', function() {
-                                    currentVideo.play().then(() => {
-                                        fallback.style.display = 'none';
-                                    }).catch(playErr => {
-                                        console.error('用户点击后仍无法播放:', playErr);
-                                        fallback.innerHTML = `
-                                            <i class="fas fa-exclamation-circle" style="font-size: 2rem; color: #ef4444;"></i>
-                                            <p>视频加载失败，请检查网络连接或视频文件</p>
-                                        `;
-                                    });
-                                });
+                                </div>
+                            </li>
+                            
+                            <!-- 视频2 -->
+                            <li class="glide__slide">
+                                <div class="video-container">
+                                    <video class="video-item hover-lift" style="width: 100%;" muted playsinline>
+                                        <source src="src/6192.mp4" type="video/mp4">
+                                        <div class="video-fallback">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                            <p>您的浏览器不支持HTML5视频播放</p>
+                                        </div>
+                                    </video>
+                                    <div class="video-loading">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <!-- 视频3 -->
+                            <li class="glide__slide">
+                                <div class="video-container">
+                                    <video class="video-item hover-lift" style="width: 100%;" muted playsinline>
+                                        <source src="src/6193.mp4" type="video/mp4">
+                                        <div class="video-fallback">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                            <p>您的浏览器不支持HTML5视频播放</p>
+                                        </div>
+                                    </video>
+                                    <div class="video-loading">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <!-- 视频4 -->
+                            <li class="glide__slide">
+                                <div class="video-container">
+                                    <video class="video-item hover-lift" style="width: 100%;" muted playsinline>
+                                        <source src="src/6194.mp4" type="video/mp4">
+                                        <div class="video-fallback">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                            <p>您的浏览器不支持HTML5视频播放</p>
+                                        </div>
+                                    </video>
+                                    <div class="video-loading">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <!-- 视频5 -->
+                            <li class="glide__slide">
+                                <div class="video-container">
+                                    <video class="video-item hover-lift" style="width: 100%;" muted playsinline>
+                                        <source src="src/6195.mp4" type="video/mp4">
+                                        <div class="video-fallback">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                            <p>您的浏览器不支持HTML5视频播放</p>
+                                        </div>
+                                    </video>
+                                    <div class="video-loading">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <!-- 视频6 -->
+                            <li class="glide__slide">
+                                <div class="video-container">
+                                    <video class="video-item hover-lift" style="width: 100%;" muted playsinline>
+                                        <source src="src/6196.mp4" type="video/mp4">
+                                        <div class="video-fallback">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                            <p>您的浏览器不支持HTML5视频播放</p>
+                                        </div>
+                                    </video>
+                                    <div class="video-loading">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <!-- 视频7 -->
+                            <li class="glide__slide">
+                                <div class="video-container">
+                                    <video class="video-item hover-lift" style="width: 100%;" muted playsinline>
+                                        <source src="src/6197.mp4" type="video/mp4">
+                                        <div class="video-fallback">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                            <p>您的浏览器不支持HTML5视频播放</p>
+                                        </div>
+                                    </video>
+                                    <div class="video-loading">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <!-- 视频8 -->
+                            <li class="glide__slide">
+                                <div class="video-container">
+                                    <video class="video-item hover-lift" style="width: 100%;" muted playsinline>
+                                        <source src="src/6198.mp4" type="video/mp4">
+                                        <div class="video-fallback">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                            <p>您的浏览器不支持HTML5视频播放</p>
+                                        </div>
+                                    </video>
+                                    <div class="video-loading">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <!-- 视频9 -->
+                            <li class="glide__slide">
+                                <div class="video-container">
+                                    <video class="video-item hover-lift" style="width: 100%;" muted playsinline>
+                                        <source src="src/6199.mp4" type="video/mp4">
+                                        <div class="video-fallback">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                            <p>您的浏览器不支持HTML5视频播放</p>
+                                        </div>
+                                    </video>
+                                    <div class="video-loading">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </li>
+                            
+                            <!-- 视频10 -->
+                            <li class="glide__slide">
+                                <div class="video-container">
+                                    <video class="video-item hover-lift" style="width: 100%;" muted playsinline>
+                                        <source src="src/61910.mp4" type="video/mp4">
+                                        <div class="video-fallback">
+                                            <i class="fas fa-exclamation-circle"></i>
+                                            <p>您的浏览器不支持HTML5视频播放</p>
+                                        </div>
+                                    </video>
+                                    <div class="video-loading">
+                                        <div class="spinner"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-title">BibTeX</div>
+            <div class="container is-max-desktop content max-w-4xl mx-auto px-4 mb-16">
+                <pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto"><code>@article{wang2025chronotailor,
+    title={ChronoTailor: Harnessing Attention Guidance for Fine-Grained Video Virtual Try-On},
+    author={Wang, Jinjuan and Sun, Wenzhang and Li, Ming and Zheng, Yun and Li, Fanyao and Tao, Zhulin and Di, Donglin and Li, Hao and Chen, Wei and Huang, Xianglin},
+    journal={arXiv preprint arXiv:2506.05858},
+    year={2025}
+}</code></pre>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // 初始化图片轮播
+                const glide1 = new Glide('.glide1', {
+                    type: 'carousel',
+                    startAt: 0,
+                    perView: 1,
+                    autoplay: 5000,
+                    animationDuration: 500,
+                    gap: 20,
+                    keyboard: true,
+                    touch: true
+                });
+                glide1.mount();
+                
+                // 初始化视频轮播
+                const glide2 = new Glide('.glide2', {
+                    type: 'carousel',
+                    startAt: 0,
+                    perView: 1,
+                    autoplay: 5000,
+                    animationDuration: 500,
+                    gap: 20,
+                    keyboard: true,
+                    touch: true,
+                    reorder: false
+                });
+                glide2.mount();
+                
+                // 轮播切换时暂停其他视频，播放当前视频
+                glide2.on(['run.after'], function() {
+                    const currentSlide = this.index;
+                    const allVideos = document.querySelectorAll('.glide__slide video');
+                    
+                    // 暂停所有视频
+                    allVideos.forEach(video => {
+                        video.pause();
+                    });
+                    
+                    // 播放当前视频
+                    if (allVideos[currentSlide]) {
+                        const currentVideo = allVideos[currentSlide];
+                        const fallback = currentVideo.querySelector('.video-fallback');
+                        const loading = currentVideo.parentElement.querySelector('.video-loading');
+                        
+                        // 显示加载动画
+                        if (loading) loading.style.display = 'flex';
+                        
+                        // 尝试播放视频
+                        currentVideo.play()
+                            .then(() => {
+                                // 播放成功，隐藏加载动画和错误提示
+                                if (loading) loading.style.display = 'none';
+                                if (fallback) fallback.style.display = 'none';
+                            })
+                            .catch(err => {
+                                console.error('视频播放失败:', err);
+                                // 播放失败，隐藏加载动画，显示错误提示
+                                if (loading) loading.style.display = 'none';
+                                if (fallback) {
+                                    fallback.style.display = 'flex';
+                                    fallback.innerHTML = `
+                                        <i class="fas fa-exclamation-circle text-red-500"></i>
+                                        <p class="text-white">视频加载失败</p>
+                                        <p class="text-white text-sm mt-2">错误: ${err.message}</p>
+                                    `;
+                                }
                             });
+                    }
+                });
+                
+                // 视频加载逻辑
+                const videos = document.querySelectorAll('.video-item');
+                videos.forEach(video => {
+                    const fallback = video.querySelector('.video-fallback');
+                    const loading = video.parentElement.querySelector('.video-loading');
+                    
+                    // 视频加载开始
+                    video.addEventListener('loadstart', function() {
+                        if (loading) loading.style.display = 'flex';
+                        if (fallback) fallback.style.display = 'none';
+                    });
+                    
+                    // 视频加载完成
+                    video.addEventListener('canplay', function() {
+                        if (loading) loading.style.display = 'none';
+                    });
+                    
+                    // 视频加载错误
+                    video.addEventListener('error', function() {
+                        if (loading) loading.style.display = 'none';
+                        if (fallback) {
+                            fallback.style.display = 'flex';
+                            fallback.innerHTML = `
+                                <i class="fas fa-exclamation-circle text-red-500"></i>
+                                <p class="text-white">视频加载失败</p>
+                                <button class="mt-3 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors" onclick="this.parentElement.style.display='none';this.closest('.video-container').querySelector('video').load()">
+                                    重试
+                                </button>
+                            `;
+                        }
+                        console.error('视频加载错误:', video.error);
+                    });
+                    
+                    // 视频播放结束后循环播放
+                    video.addEventListener('ended', function() {
+                        if (this.muted) { // 仅循环静音视频
+                            this.play();
                         }
                     });
                     
-                   // 视频加载逻辑（简化，移除不必要的src设置）
-                    const videos = document.querySelectorAll('.video-item');
-                    videos.forEach(video => {
-                        const fallback = video.querySelector('.video-fallback');
-                        
-                        // 视频加载错误处理
-                        video.addEventListener('error', function() {
-                            const loading = video.parentElement.querySelector('.video-loading');
-                            loading.style.display = 'none';
-                            fallback.style.display = 'flex';
-                            
-                            // 错误状态显示
-                            fallback.innerHTML = `
-                                <i class="fas fa-exclamation-circle" style="font-size: 3rem; color: #ef4444;"></i>
-                                <p>视频加载失败，请检查路径或格式</p>
-                                <button class="reload-btn" style="margin-top: 10px; padding: 8px 16px; background: #3B82F6; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                                    重试加载
-                                </button>
-                            `;
-                            
-                            // 重试加载按钮
-                            fallback.querySelector('.reload-btn').addEventListener('click', function() {
-                                loading.style.display = 'flex';
-                                fallback.style.display = 'none';
-                                video.load(); // 重新加载视频
-                            });
-                        });
-                        
-                        // 视频播放结束后循环播放
-                        video.addEventListener('ended', function() {
-                            if (this.muted) { // 仅循环静音视频
-                                this.play();
-                            }
-                        });
+                    // 视频元数据加载完成
+                    video.addEventListener('loadedmetadata', function() {
+                        if (loading) loading.style.display = 'none';
                     });
-                    
-                    // 优化：视频进入视口时才加载（需要Intersection Observer API）
+                });
+                
+                // 视频进入视口时才加载（需要Intersection Observer API）
+                if ('IntersectionObserver' in window) {
                     const observer = new IntersectionObserver((entries) => {
                         entries.forEach(entry => {
                             if (entry.isIntersecting) {
                                 const video = entry.target.querySelector('video');
-                                if (video && !video.src) {
-                                    video.load(); // 直接加载，无需设置src，因为已在HTML中设置
+                                if (video) {
+                                    video.load();
+                                    // 开始轮播
+                                    if (glide2 && !glide2.isGliding) {
+                                        glide2.play();
+                                    }
+                                }
+                            } else {
+                                const video = entry.target.querySelector('video');
+                                if (video) {
+                                    video.pause();
                                 }
                             }
                         });
-                    }, { threshold: 0.1 }); // 当视频10%进入视口时加载
+                    }, { threshold: 0.1 });
                     
                     // 观察所有轮播项
                     document.querySelectorAll('.glide__slide').forEach(slide => {
                         observer.observe(slide);
                     });
-                });
-            </script>
-            <br>
-          <div class="section-title">BibTeX</div>
-            <div class="container is-max-desktop content">
-              <pre><code>@article{wang2025chronotailor,
-                          title={ChronoTailor: Harnessing Attention Guidance for Fine-Grained Video Virtual Try-On},
-                          author={Wang, Jinjuan and Sun, Wenzhang and Li, Ming and Zheng, Yun and Li, Fanyao and Tao, Zhulin and Di, Donglin and Li, Hao and Chen, Wei and Huang, Xianglin},
-                          journal={arXiv preprint arXiv:2506.05858},
-                          year={2025}
-}</code></pre>
-            </div>
-
-</section>
-
-        <script>
-            // Make the carousel for the comparisons
-            var glide1 = new Glide(".glide1", {
-                type: "carousel",
-                startAt: 0,
-                perView: 1,
-                autoplay: 4000
-            }).mount();
-        </script>
-        <script>
-            // Make the carousel for the comparisons
-            var glide2 = new Glide(".glide2", {
-                type: "carousel",
-                startAt: 0,
-                perView: 1,
-                autoplay: 4000
-            }).mount();
-        </script>
-        <script>
-            // Make the carousel for the comparisons
-            var glide3 = new Glide(".glide3", {
-                type: "carousel",
-                startAt: 0,
-                perView: 1,
-                autoplay: 4000
-            }).mount();
+                }
+            });
         </script>
     </body>
 </html>
